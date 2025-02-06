@@ -5,16 +5,23 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.dondeestoygame.databinding.ActivityPantallaInicioBinding
 
 class pantalla_inicio : AppCompatActivity() {
+
+    private lateinit var binding: ActivityPantallaInicioBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_pantalla_inicio)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        binding = ActivityPantallaInicioBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        val salir = binding.btnSalir
+
+        salir.setOnClickListener {
+            finish()
         }
+
     }
 }
