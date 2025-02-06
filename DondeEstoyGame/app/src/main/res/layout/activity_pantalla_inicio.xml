@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@drawable/imagen_menu" />
+            android:src="@mipmap/logo" />
 
     </androidx.cardview.widget.CardView>
     <TextView
