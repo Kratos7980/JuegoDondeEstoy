@@ -8,10 +8,10 @@ object ComidaSurtidor {
 
     fun getComida():ArrayList<Comida>{
         listComida.add(Comida("Migas de pastor", R.drawable.migas, 0, 0))
-//        listComida.add(Comida("Sopa de ajo", "sopa_castellana", 0, 0))
-//        listComida.add(Comida("Cocas", "cocas", 0, 0))
-//        listComida.add(Comida("Salmorejo", "salmorejo", 0, 0))
-//        listComida.add(Comida("Zarangollo", "zarangollo", 0, 0))
+        listComida.add(Comida("Sopa de ajo", R.drawable.sopa_castellana, 0, 0))
+        listComida.add(Comida("Cocas", R.drawable.cocas, 0, 0))
+        listComida.add(Comida("Salmorejo", R.drawable.salmorejo, 0, 0))
+        listComida.add(Comida("Zarangollo", R.drawable.zarangollo, 0, 0))
 
         return listComida
     }

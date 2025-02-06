@@ -23,7 +23,7 @@ class PantallaPrincipal : AppCompatActivity() {
         val rv = binding.rvItemsList
 
         myAdapter = ComidaAdapter(listComida, this)
-        rv.layoutManager = LinearLayoutManager(this)
+        rv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         rv.adapter = myAdapter
 
     }

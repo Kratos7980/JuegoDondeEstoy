@@ -23,7 +23,6 @@ class ComidaAdapter (private val listComida: ArrayList<Comida>, private val cont
         val comida = listComida[position]
 
         holder.nombreComidaItem.text = comida.title
-        //val imageId = holder.itemView.context.resources.getIdentifier(comida.image, "drawable", holder.itemView.context.packageName)
         holder.imageItem.setImageResource(comida.image)
 
         //Definir onClick de los items
