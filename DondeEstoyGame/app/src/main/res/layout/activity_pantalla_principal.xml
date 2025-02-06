@@ -5,4 +5,14 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PantallaPrincipal"/>
+    tools:context=".PantallaPrincipal" >
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvItemsList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingTop="25dp"
+        android:paddingBottom="40dp"
+        tools:listitem="@layout/item_comida" />
+</androidx.constraintlayout.widget.ConstraintLayout>
