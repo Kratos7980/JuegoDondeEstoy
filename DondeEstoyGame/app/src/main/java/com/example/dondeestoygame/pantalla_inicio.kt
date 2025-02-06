@@ -1,5 +1,6 @@
 package com.example.dondeestoygame
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -22,6 +23,14 @@ class pantalla_inicio : AppCompatActivity() {
         salir.setOnClickListener {
             finish()
         }
+
+        val jugar = binding.btnJugar
+
+        jugar.setOnClickListener {
+            intent = Intent(this, PantallaPrincipal::class.java)
+            startActivity(intent)
+        }
+
 
     }
 }
