@@ -1,4 +1,4 @@
-package com.example.dondeestoygame
+package com.example.dondeestoygame.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
