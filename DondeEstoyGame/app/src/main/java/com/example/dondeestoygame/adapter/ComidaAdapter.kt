@@ -1,6 +1,8 @@
 package com.example.dondeestoygame.adapter
 
 import android.content.Context
+import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -27,7 +29,11 @@ class ComidaAdapter (private val listComida: ArrayList<Comida>, private val cont
 
         //Definir onClick de los items
         holder.itemView.setOnClickListener {
-            Toast.makeText(context, comida.title, Toast.LENGTH_SHORT).show()
+            val intent = Intent(context, Map::class.java)
+            val bundle = Bundle()
+            bundle.putSerializable("comida", comida)
+            intent.putExtras(bundle)
+            context.startActivity(intent)
         }
 
     }
