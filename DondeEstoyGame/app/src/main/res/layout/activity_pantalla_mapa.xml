@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.Map">
+    tools:context=".view.pantalla_map">
 
     <org.osmdroid.views.MapView
         android:id="@+id/map"
@@ -22,16 +22,16 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="3dp"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/txtComida"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"

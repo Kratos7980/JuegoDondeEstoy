@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dondeestoygame.R
 import com.example.dondeestoygame.modelo.Comida
+import com.example.dondeestoygame.view.PantallaMapa
 
 class ComidaAdapter (private val listComida: ArrayList<Comida>, private val context: Context): RecyclerView.Adapter<ComidaViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComidaViewHolder {
@@ -29,10 +30,10 @@ class ComidaAdapter (private val listComida: ArrayList<Comida>, private val cont
 
         //Definir onClick de los items
         holder.itemView.setOnClickListener {
-            val intent = Intent(context, Map::class.java)
+            val intent = Intent(context, PantallaMapa::class.java)
             val bundle = Bundle()
             bundle.putSerializable("comida", comida)
-            intent.putExtras(bundle)
+            intent.putExtra("data", bundle)
             context.startActivity(intent)
         }
 
