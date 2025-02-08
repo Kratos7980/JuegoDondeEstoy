@@ -9,6 +9,7 @@ import org.osmdroid.config.Configuration
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -232,6 +233,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
         val distanciaMurcia:Double
         val distanciaCordoba:Double
         val distanciaValencia:Double
+        val direccion:String
 
         point?.let {
             // Verificar si la distancia con alguno de los marcadores es menor a 100 metros
@@ -242,7 +244,8 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                         createMarkerCiudadReal()
                         ampliarMapa(latitudCiudadReal, longitudCiudadReal)
                     }else{
-                        // Alerta pista de posición real.
+                        direccion = calcularDirección(it.latitude, it.longitude, latitudCiudadReal, longitudCiudadReal)
+                        mostrarAlerta(direccion)
                     }
                 }
                 "Sopa de ajo" -> {
@@ -251,7 +254,8 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                         createMarkerSegovia()
                         ampliarMapa(latitudSegovia, longitudSegovia)
                     }else{
-                        // Alerta pista de posición real.
+                        direccion = calcularDirección(it.latitude, it.longitude, latitudSegovia, longitudSegovia)
+                        mostrarAlerta(direccion)
                     }
                 }
                 "Cocas" -> {
@@ -260,7 +264,8 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                         createMarkerValencia()
                         ampliarMapa(latitudValencia, longitudValencia)
                     }else{
-                        //Alerta pista de posición real.
+                        direccion = calcularDirección(it.latitude,it.longitude, latitudValencia, longitudValencia)
+                        mostrarAlerta(direccion)
                     }
                 }
                 "Salmorejo" -> {
@@ -269,7 +274,8 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                         createMarkerCordoba()
                         ampliarMapa(latitudCordoba, longitudCordoba)
                     }else{
-                        //Alerta pista de posición real.
+                        direccion = calcularDirección(it.latitude, it.longitude, latitudCordoba, longitudCordoba)
+                        mostrarAlerta(direccion)
                     }
                 }
                 "Zarangollo" -> {
@@ -278,7 +284,8 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                         createMarketMurcia()
                         ampliarMapa(latitudMurcia, longitudMurcia)
                     }else{
-                        //Alerta pista de posición real.
+                        direccion = calcularDirección(it.latitude, it.longitude, latitudMurcia, longitudMurcia)
+                        mostrarAlerta(direccion)
                     }
                 }
             }
@@ -346,6 +353,13 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
         val geoPointEspana = GeoPoint(latitud, longitud) // Centro aproximado de España
         mapView.controller.setCenter(geoPointEspana)
         mapView.controller.setZoom(6.95) // Ajusta el zoom según la vista deseada
+    }
+
+    private fun mostrarAlerta(direccion:String) {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("¡Te equivocaste!")
+        builder.setMessage("Está más al " + direccion)
+        builder.show()
     }
 
 }
