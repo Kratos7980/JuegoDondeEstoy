@@ -332,7 +332,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
         return radioTierra * c // Distancia en metros
     }
 
-    private fun calcularDirección(lat1:Double, lon1:Double, lat2:Double lon2:Double):String{
+    private fun calcularDirección(lat1:Double, lon1:Double, lat2:Double, lon2:Double):String{
         // Determinar dirección
         val direccion = when {
             lat2 > lat1 && lon2 > lon1 -> "Noreste"
