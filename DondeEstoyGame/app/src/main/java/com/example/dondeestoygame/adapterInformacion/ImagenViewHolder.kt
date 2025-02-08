@@ -11,6 +11,6 @@ class ImagenViewHolder(itemView: View) : ViewHolder(itemView) {
 
     val nombre = binding.titleComida
     val imagen = binding.imgComida
-    val puntuacion = binding.puntuacionComida
+//    val puntuacion = binding.puntuacionComida
 
 }

@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.example.dondeestoygame.R
 import com.example.dondeestoygame.modelo.Comida
+import com.example.dondeestoygame.modelo.Puntuacion
 
 class InformacionAdapter(private val comidas: List<Comida>): Adapter<ImagenViewHolder>() {
 
@@ -36,10 +37,10 @@ class InformacionAdapter(private val comidas: List<Comida>): Adapter<ImagenViewH
     }
 
     override fun onBindViewHolder(holder: ImagenViewHolder, position: Int) {
-        val item = comidas[position]
-        holder.nombre.text = item.title
-        holder.puntuacion.text = item.puntuacion.toString()
-        holder.imagen.setImageResource(item.image)
+        val comida = comidas[position]
+        holder.nombre.text = comida.title
+//        holder.puntuacion.text = Puntuacion.getPuntos().toString()
+        holder.imagen.setImageResource(comida.image)
 
         
     }
