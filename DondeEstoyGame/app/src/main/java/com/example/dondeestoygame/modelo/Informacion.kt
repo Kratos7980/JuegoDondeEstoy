@@ -1,14 +1,10 @@
 package com.example.dondeestoygame.modelo
 
-object Puntuacion {
+object Informacion {
 
-    private var puntos:Int
-    private var intentos:Int
-
-    init {
-        puntos = 0
-        intentos = 5
-    }
+    private var puntos:Int = 0
+    private var intentos:Int = 5
+    private val listComida:ArrayList<Comida> = ArrayList()
 
     fun getPuntos():Int{
         return puntos
@@ -24,6 +20,14 @@ object Puntuacion {
 
     fun restarIntentos(intentos:Int){
         this.intentos -= intentos
+    }
+
+    fun getListComida():ArrayList<Comida>{
+        return listComida
+    }
+
+    fun addComida(comida:Comida){
+        listComida.add(comida)
     }
 
 //    1ª -> 100 puntos

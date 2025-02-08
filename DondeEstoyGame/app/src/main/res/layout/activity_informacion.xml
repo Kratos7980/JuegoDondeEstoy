@@ -9,15 +9,15 @@
     tools:context=".view.ActivityInformacion">
 
     <TextView
-        android:id="@+id/titiulo"
+        android:id="@+id/tvImgAcertadas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Informacion de puntuacion"
+        android:text="Imágenes acertadas"
         android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.12"
+        app:layout_constraintHorizontal_bias="0.082"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.047" />
@@ -25,12 +25,43 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvInformacion"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="180dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="14dp"
         android:layout_marginEnd="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titiulo"
-        tools:listitem="@layout/item_puntuacion" />
+        app:layout_constraintTop_toBottomOf="@+id/tvImgAcertadas"
+        tools:listitem="@layout/item_puntuacion">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/tvPuntuacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Puntuación: "
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.057"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rvInformacion"
+        app:layout_constraintVertical_bias="0.118" />
+
+    <TextView
+        android:id="@+id/tvPuntos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="puntos"
+        android:textColor="#FFFFFF"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.052"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPuntuacion"
+        app:layout_constraintVertical_bias="0.068" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
