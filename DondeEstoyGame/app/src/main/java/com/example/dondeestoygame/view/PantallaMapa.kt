@@ -74,6 +74,9 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
         //createMarkers()
         //myLocation()
 
+
+
+
     }
 
     override fun onResume() {
@@ -219,6 +222,9 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
         mapView.overlays.add(markerMurcia)
     }
 
+
+    private var ultimoMarcador: Marker? = null
+
     override fun singleTapConfirmedHelper(point: GeoPoint?): Boolean {
         var distanciaCiudadReal = radioDeAlerta + 1
         var distanciaZamora = radioDeAlerta + 1
@@ -232,6 +238,9 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
         marker.position = point
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
         mapView.overlays.add(marker)
+
+        // Guardar la referencia al último marcador
+        ultimoMarcador = marker
 
         //Agregar un circulo de un radio de 100 metros
         val circle = Polygon(mapView)
@@ -270,6 +279,9 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                     .show()
             }
         }
+        // Eliminar el último marcador si existe
+        ultimoMarcador?.let { mapView.overlays.remove(it) }
+
         mapView.invalidate()
 
         return true
