@@ -6,7 +6,6 @@ object Informacion {
     private var intentos: Int = 5
     private val listComida: ArrayList<Comida> = ArrayList()
     private var dificultad: Int = 1
-    private var acertado: Boolean = false
 
     fun getPuntos(): Int {
         return puntos
@@ -38,11 +37,5 @@ object Informacion {
 
     fun getDificultad(): Int {
         return dificultad
-    }
-    fun setAcertado(acertado: Boolean){
-        this.acertado = acertado
-    }
-    fun getAcertado(): Boolean{
-        return acertado
     }
 }

@@ -225,7 +225,6 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                         ampliarMapa(latitudCiudadReal, longitudCiudadReal)
                         sumarPuntos()
                         Informacion.addComida(comida)
-                        Informacion.setAcertado(true)
                         mostrarAcierto("Ciudad Real");
                     }else{
                         if(Informacion.getIntentos() > 0 ){
@@ -244,7 +243,6 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                         ampliarMapa(latitudSegovia, longitudSegovia)
                         sumarPuntos()
                         Informacion.addComida(comida)
-                        Informacion.setAcertado(true)
                         mostrarAcierto("Segovia");
                     }else{
                         if(Informacion.getIntentos() > 0 ){
@@ -263,7 +261,6 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                         ampliarMapa(latitudValencia, longitudValencia)
                         sumarPuntos()
                         Informacion.addComida(comida)
-                        Informacion.setAcertado(true)
                         mostrarAcierto("Valencia");
                     }else{
                         if(Informacion.getIntentos() > 0 ){
@@ -282,7 +279,6 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                         ampliarMapa(latitudCordoba, longitudCordoba)
                         sumarPuntos()
                         Informacion.addComida(comida)
-                        Informacion.setAcertado(true)
                         mostrarAcierto("Córdoba");
                     }else{
                         if(Informacion.getIntentos() > 0 ){
@@ -301,7 +297,6 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                         ampliarMapa(latitudMurcia, longitudMurcia)
                         sumarPuntos()
                         Informacion.addComida(comida)
-                        Informacion.setAcertado(true)
                         mostrarAcierto("Murcia");
                     }else{
                         if(Informacion.getIntentos() > 0 ){
