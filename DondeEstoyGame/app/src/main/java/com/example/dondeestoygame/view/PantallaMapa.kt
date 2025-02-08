@@ -54,7 +54,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
     private val longitudCordoba = -4.7794
     private val latitudValencia = 39.4699
     private val longitudValencia = -0.3763
-    private val radioDeAlerta = 100000.0 // Radio en metros
+    private var radioDeAlerta = 100000.0 // Radio en metros
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,6 +67,10 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
         setContentView(binding.root)
         val bundle = intent.getBundleExtra("data")
         comida = bundle?.getSerializable("comida") as Comida
+
+        if(Informacion.getDificultad() == 2){
+            radioDeAlerta = 50000.0
+        }
 
         binding.imageView.setImageResource(comida.image)
         binding.txtComida.text = comida.title
@@ -155,7 +159,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
     }
 
     fun createMarkerCiudadReal(){
-        //Crear marcador migas de pastor (Ciudad Real)
+        //Crear marcador (Ciudad Real)
         val markerCR = Marker(mapView)
         markerCR.position = GeoPoint(latitudCiudadReal, longitudCiudadReal)
         markerCR.title = "Ciudad Real"
@@ -164,16 +168,16 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
 
     }
     fun createMarkerSegovia(){
-        //Crear marcador sopa_castellana (Zamora)
+        //Crear marcador (Segovia)
         val markerZamora = Marker(mapView)
         markerZamora.position = GeoPoint(latitudSegovia, longitudSegovia)
-        markerZamora.title = "Zamora"
+        markerZamora.title = "Segovia"
         markerZamora.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
         mapView.overlays.add(markerZamora)
     }
 
     fun createMarkerValencia(){
-        //Crear marcador cocas (Valencia)
+        //Crear marcador (Valencia)
         val markerValencia = Marker(mapView)
         markerValencia.position = GeoPoint(latitudValencia, longitudValencia)
         markerValencia.title = "Valencia"
@@ -182,7 +186,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
     }
 
     fun createMarkerCordoba(){
-        //Crear marcador salmorejo (Córdoba)
+        //Crear marcador (Córdoba)
         val markerCordoba = Marker(mapView)
         markerCordoba.position = GeoPoint(latitudCordoba, longitudCordoba)
         markerCordoba.title = "Córdoba"
@@ -191,7 +195,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
     }
 
     fun createMarketMurcia(){
-        //Crear marcador zarangollo (Murcia)
+        //Crear marcador (Murcia)
         val markerMurcia = Marker(mapView)
         markerMurcia.position = GeoPoint(latitudMurcia, longitudMurcia)
         markerMurcia.title = "Murcia"
@@ -223,9 +227,13 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                         Informacion.addComida(comida)
                         mostrarAcierto("Ciudad Real");
                     }else{
-                        Informacion.restarIntentos(1)
-                        direccion = calcularDireccion(it.latitude, it.longitude, latitudCiudadReal, longitudCiudadReal)
-                        mostrarAlerta(direccion)
+                        if(Informacion.getIntentos() > 0 ){
+                            Informacion.restarIntentos(1)
+                            direccion = calcularDireccion(it.latitude, it.longitude, latitudCiudadReal, longitudCiudadReal)
+                            mostrarAlerta(direccion)
+                        }else{
+                            volverAPrincipal()
+                        }
                     }
                 }
                 "Sopa de ajo" -> {
@@ -237,8 +245,13 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                         Informacion.addComida(comida)
                         mostrarAcierto("Segovia");
                     }else{
-                        direccion = calcularDireccion(it.latitude, it.longitude, latitudSegovia, longitudSegovia)
-                        mostrarAlerta(direccion)
+                        if(Informacion.getIntentos() > 0 ){
+                            Informacion.restarIntentos(1)
+                            direccion = calcularDireccion(it.latitude, it.longitude, latitudCiudadReal, longitudCiudadReal)
+                            mostrarAlerta(direccion)
+                        }else{
+                            volverAPrincipal()
+                        }
                     }
                 }
                 "Cocas" -> {
@@ -250,8 +263,13 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                         Informacion.addComida(comida)
                         mostrarAcierto("Valencia");
                     }else{
-                        direccion = calcularDireccion(it.latitude,it.longitude, latitudValencia, longitudValencia)
-                        mostrarAlerta(direccion)
+                        if(Informacion.getIntentos() > 0 ){
+                            Informacion.restarIntentos(1)
+                            direccion = calcularDireccion(it.latitude, it.longitude, latitudCiudadReal, longitudCiudadReal)
+                            mostrarAlerta(direccion)
+                        }else{
+                            volverAPrincipal()
+                        }
                     }
                 }
                 "Salmorejo" -> {
@@ -263,8 +281,13 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                         Informacion.addComida(comida)
                         mostrarAcierto("Córdoba");
                     }else{
-                        direccion = calcularDireccion(it.latitude, it.longitude, latitudCordoba, longitudCordoba)
-                        mostrarAlerta(direccion)
+                        if(Informacion.getIntentos() > 0 ){
+                            Informacion.restarIntentos(1)
+                            direccion = calcularDireccion(it.latitude, it.longitude, latitudCiudadReal, longitudCiudadReal)
+                            mostrarAlerta(direccion)
+                        }else{
+                            volverAPrincipal()
+                        }
                     }
                 }
                 "Zarangollo" -> {
@@ -276,8 +299,13 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                         Informacion.addComida(comida)
                         mostrarAcierto("Murcia");
                     }else{
-                        direccion = calcularDireccion(it.latitude, it.longitude, latitudMurcia, longitudMurcia)
-                        mostrarAlerta(direccion)
+                        if(Informacion.getIntentos() > 0 ){
+                            Informacion.restarIntentos(1)
+                            direccion = calcularDireccion(it.latitude, it.longitude, latitudCiudadReal, longitudCiudadReal)
+                            mostrarAlerta(direccion)
+                        }else{
+                            volverAPrincipal()
+                        }
                     }
                 }
             }
@@ -385,6 +413,16 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
             3 -> Informacion.sumarPuntos(50)
             2 -> Informacion.sumarPuntos(25)
             1 -> Informacion.sumarPuntos(10)
+        }
+    }
+
+    private fun volverAPrincipal(){
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("¡PERDISTE!")
+        builder.setMessage("¡Te has quedado sin intentos!")
+        builder.setPositiveButton("OK") { dialog, which ->
+            val intent = Intent(this, PantallaPrincipal::class.java)
+            startActivity(intent)
         }
     }
 

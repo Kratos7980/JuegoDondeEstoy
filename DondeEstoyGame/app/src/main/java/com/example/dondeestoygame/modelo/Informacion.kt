@@ -2,37 +2,40 @@ package com.example.dondeestoygame.modelo
 
 object Informacion {
 
-    private var puntos:Int = 0
-    private var intentos:Int = 5
-    private val listComida:ArrayList<Comida> = ArrayList()
+    private var puntos: Int = 0
+    private var intentos: Int = 5
+    private val listComida: ArrayList<Comida> = ArrayList()
+    private var dificultad: Int = 1
 
-    fun getPuntos():Int{
+    fun getPuntos(): Int {
         return puntos
     }
 
-    fun sumarPuntos(puntos:Int){
+    fun sumarPuntos(puntos: Int) {
         this.puntos += puntos
     }
 
-    fun getIntentos():Int{
+    fun getIntentos(): Int {
         return intentos
     }
 
-    fun restarIntentos(intentos:Int){
+    fun restarIntentos(intentos: Int) {
         this.intentos -= intentos
     }
 
-    fun getListComida():ArrayList<Comida>{
+    fun getListComida(): ArrayList<Comida> {
         return listComida
     }
 
-    fun addComida(comida:Comida){
+    fun addComida(comida: Comida) {
         listComida.add(comida)
     }
 
-//    1ª -> 100 puntos
-//    2ª -> 75 puntos
-//    3ª -> 50 puntos
-//    4ª -> 25 puntos
-//    5ª -> 10 puntos
+    fun setDificultad(nivel: Int) {
+        this.dificultad = nivel
+    }
+
+    fun getDificultad(): Int {
+        return dificultad
+    }
 }

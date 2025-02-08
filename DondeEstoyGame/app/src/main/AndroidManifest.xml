@@ -29,7 +29,7 @@
             android:name=".view.PantallaPrincipal"
             android:exported="false" />
         <activity
-            android:name=".view.pantalla_inicio"
+            android:name=".view.Pantalla_inicio"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
