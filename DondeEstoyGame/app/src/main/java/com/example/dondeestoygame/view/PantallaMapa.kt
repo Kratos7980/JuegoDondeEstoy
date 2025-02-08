@@ -70,7 +70,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
         mapView = binding.map
 
         setupMap()
-        createMarkers()
+        //createMarkers()
         //myLocation()
 
     }
