@@ -37,26 +37,26 @@ class MirarVideos : AppCompatActivity() {
                                 + packageName + "/" + R.raw.migas
                         ))
                 }
-                "Sopa de ajo" -> {
-                    binding.vv.setVideoURI(
-                        Uri.parse("android.resource://"
-                                + packageName + "/" + R.raw.sopa_castellana))
-                }
-                "Cocas" -> {
-                    binding.vv.setVideoURI(
-                        Uri.parse("android.resource://"
-                                + packageName + "/" + R.raw.cocas))
-                }
-                "Salmorejo" -> {
-                    binding.vv.setVideoURI(
-                        Uri.parse("android.resource://"
-                                + packageName + "/" + R.raw.salmorejo))
-                }
-                "Zarangollo" -> {
-                    binding.vv.setVideoURI(
-                        Uri.parse("android.resource://"
-                                + packageName + "/" + R.raw.zarangollo))
-                }
+//                "Sopa de ajo" -> {
+//                    binding.vv.setVideoURI(
+//                        Uri.parse("android.resource://"
+//                                + packageName + "/" + R.raw.sopa_castellana))
+//                }
+//                "Cocas" -> {
+//                    binding.vv.setVideoURI(
+//                        Uri.parse("android.resource://"
+//                                + packageName + "/" + R.raw.cocas))
+//                }
+//                "Salmorejo" -> {
+//                    binding.vv.setVideoURI(
+//                        Uri.parse("android.resource://"
+//                                + packageName + "/" + R.raw.salmorejo))
+//                }
+//                "Zarangollo" -> {
+//                    binding.vv.setVideoURI(
+//                        Uri.parse("android.resource://"
+//                                + packageName + "/" + R.raw.zarangollo))
+//                }
 
             }
             binding.vv.setVideoURI(
