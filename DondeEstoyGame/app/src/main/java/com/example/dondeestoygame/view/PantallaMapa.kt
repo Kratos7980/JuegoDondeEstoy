@@ -52,7 +52,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
     private val longitudCordoba = -4.7794
     private val latitudValencia = 39.4699
     private val longitudValencia = -0.3763
-    private val radioDeAlerta = 100.0 // Radio en metros
+    private val radioDeAlerta = 100000.0 // Radio en metros
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -244,7 +244,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                         createMarkerCiudadReal()
                         ampliarMapa(latitudCiudadReal, longitudCiudadReal)
                     }else{
-                        direccion = calcularDirección(it.latitude, it.longitude, latitudCiudadReal, longitudCiudadReal)
+                        direccion = calcularDireccion(it.latitude, it.longitude, latitudCiudadReal, longitudCiudadReal)
                         mostrarAlerta(direccion)
                     }
                 }
@@ -254,7 +254,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                         createMarkerSegovia()
                         ampliarMapa(latitudSegovia, longitudSegovia)
                     }else{
-                        direccion = calcularDirección(it.latitude, it.longitude, latitudSegovia, longitudSegovia)
+                        direccion = calcularDireccion(it.latitude, it.longitude, latitudSegovia, longitudSegovia)
                         mostrarAlerta(direccion)
                     }
                 }
@@ -264,7 +264,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                         createMarkerValencia()
                         ampliarMapa(latitudValencia, longitudValencia)
                     }else{
-                        direccion = calcularDirección(it.latitude,it.longitude, latitudValencia, longitudValencia)
+                        direccion = calcularDireccion(it.latitude,it.longitude, latitudValencia, longitudValencia)
                         mostrarAlerta(direccion)
                     }
                 }
@@ -274,7 +274,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                         createMarkerCordoba()
                         ampliarMapa(latitudCordoba, longitudCordoba)
                     }else{
-                        direccion = calcularDirección(it.latitude, it.longitude, latitudCordoba, longitudCordoba)
+                        direccion = calcularDireccion(it.latitude, it.longitude, latitudCordoba, longitudCordoba)
                         mostrarAlerta(direccion)
                     }
                 }
@@ -284,12 +284,11 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                         createMarketMurcia()
                         ampliarMapa(latitudMurcia, longitudMurcia)
                     }else{
-                        direccion = calcularDirección(it.latitude, it.longitude, latitudMurcia, longitudMurcia)
+                        direccion = calcularDireccion(it.latitude, it.longitude, latitudMurcia, longitudMurcia)
                         mostrarAlerta(direccion)
                     }
                 }
             }
-
         }
 
         // Eliminar el último marcador si existe
@@ -306,7 +305,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
         // Guardar la referencia al último marcador
         ultimoMarcador = marker
 
-        //Agregar un circulo de un radio de 100 metros
+        //Agregar un circulo de un radio de 100 km
         val circle = Polygon(mapView)
         circle.points = Polygon.pointsAsCircle(point, 100.0)
         circle.fillPaint.color = Color.argb(50,0,0,255)
@@ -332,7 +331,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
         return radioTierra * c // Distancia en metros
     }
 
-    private fun calcularDirección(lat1:Double, lon1:Double, lat2:Double, lon2:Double):String{
+    private fun calcularDireccion(lat1:Double, lon1:Double, lat2:Double, lon2:Double):String{
         // Determinar dirección
         val direccion = when {
             lat2 > lat1 && lon2 > lon1 -> "Noreste"
@@ -349,10 +348,12 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
     }
 
     fun ampliarMapa(latitud:Double, longitud:Double){
+        
         // Configurar el centro en España y el nivel de zoom
         val geoPointEspana = GeoPoint(latitud, longitud) // Centro aproximado de España
         mapView.controller.setCenter(geoPointEspana)
-        mapView.controller.setZoom(6.95) // Ajusta el zoom según la vista deseada
+        mapView.controller.setZoom(12.00) // Ajusta el zoom según la vista deseada
+
     }
 
     private fun mostrarAlerta(direccion:String) {
