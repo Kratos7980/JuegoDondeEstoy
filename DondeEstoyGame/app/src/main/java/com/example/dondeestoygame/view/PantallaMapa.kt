@@ -38,6 +38,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
     private val MULTIPLE_PERMISSION_REQUEST_CODE: Int = 4
     private lateinit var mapView: MapView
     private lateinit var binding: ActivityPantallaMapaBinding
+    private lateinit var comida:Comida
 
     // Ubicaciones de interés (latitud y longitud)
     private val latitudCiudadReal = 38.9908
@@ -62,7 +63,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
         binding = ActivityPantallaMapaBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val bundle = intent.getBundleExtra("data")
-        val comida:Comida = bundle?.getSerializable("comida") as Comida
+        comida = bundle?.getSerializable("comida") as Comida
 
         binding.imageView.setImageResource(comida.image)
         binding.txtComida.text = comida.title
@@ -173,7 +174,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
         mapView.overlays.add(mLocationOverlay)
     }
 
-    fun createMarkers(){
+    fun createMarkerCiudadReal(){
         //Crear marcador migas de pastor (Ciudad Real)
         val markerCR = Marker(mapView)
         markerCR.position = GeoPoint(latitudCiudadReal, longitudCiudadReal)
@@ -181,53 +182,49 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
         markerCR.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
         mapView.overlays.add(markerCR)
 
+    }
+    fun createMarkerZamora(){
         //Crear marcador sopa_castellana (Zamora)
         val markerZamora = Marker(mapView)
         markerZamora.position = GeoPoint(latitudZamora, longitudZamora)
         markerZamora.title = "Zamora"
         markerZamora.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
         mapView.overlays.add(markerZamora)
+    }
 
+    fun createMarkerValencia(){
         //Crear marcador cocas (Valencia)
         val markerValencia = Marker(mapView)
         markerValencia.position = GeoPoint(latitudValencia, longitudValencia)
         markerValencia.title = "Valencia"
         markerValencia.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
         mapView.overlays.add(markerValencia)
+    }
 
+    fun createMarkerCordoba(){
         //Crear marcador salmorejo (Córdoba)
         val markerCordoba = Marker(mapView)
         markerCordoba.position = GeoPoint(latitudCordoba, longitudCordoba)
         markerCordoba.title = "Córdoba"
         markerCordoba.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
         mapView.overlays.add(markerCordoba)
+    }
 
+    fun createMarketMurcia(){
         //Crear marcador zarangollo (Murcia)
         val markerMurcia = Marker(mapView)
         markerMurcia.position = GeoPoint(latitudMurcia, longitudMurcia)
         markerMurcia.title = "Murcia"
         markerMurcia.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
         mapView.overlays.add(markerMurcia)
-
     }
 
     override fun singleTapConfirmedHelper(point: GeoPoint?): Boolean {
-
-        point?.let {
-            // Verificar si la distancia con alguno de los marcadores es menor a 100 metros
-            val distanciaCiudadReal = calcularDistancia(it.latitude, it.longitude, latitudCiudadReal, longitudCiudadReal)
-            val distanciaZamora = calcularDistancia(it.latitude, it.longitude, latitudZamora, longitudZamora)
-            val distanciaMurcia = calcularDistancia(it.latitude, it.longitude, latitudMurcia, longitudMurcia)
-            val distanciaCordoba = calcularDistancia(it.latitude, it.longitude, latitudCordoba, longitudCordoba)
-            val distanciaValencia = calcularDistancia(it.latitude, it.longitude, latitudValencia, longitudValencia)
-
-            if (distanciaCiudadReal <= radioDeAlerta || distanciaZamora <= radioDeAlerta || distanciaMurcia <= radioDeAlerta || distanciaCordoba <= radioDeAlerta || distanciaValencia <= radioDeAlerta) {
-               //Ampliar a zona exacta.
-            } else {
-                Toast.makeText(this, "No está cerca de un sitio específico.", Toast.LENGTH_SHORT)
-                    .show()
-            }
-        }
+        var distanciaCiudadReal = radioDeAlerta + 1
+        var distanciaZamora = radioDeAlerta + 1
+        var distanciaMurcia = radioDeAlerta + 1
+        var distanciaCordoba = radioDeAlerta + 1
+        var distanciaValencia = radioDeAlerta + 1
 
         //Maneja el evento clic del mapa
         //Agregar marcador
@@ -243,7 +240,38 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
         circle.fillPaint.strokeWidth = 2.0f
         mapView.overlays.add(circle)
 
+        point?.let {
+            // Verificar si la distancia con alguno de los marcadores es menor a 100 metros
+            when(comida.title){
+                "Migas de pastor" ->{
+                    distanciaCiudadReal = calcularDistancia(it.latitude, it.longitude, latitudCiudadReal, longitudCiudadReal)
+                }
+                "Sopa de ajo" ->{
+                    distanciaZamora = calcularDistancia(it.latitude, it.longitude, latitudZamora, longitudZamora)
+                }
+                "Cocas" ->{
+                    distanciaValencia = calcularDistancia(it.latitude, it.longitude, latitudValencia, longitudValencia)
+                }
+                "Salmorejo" -> {
+                    distanciaCordoba = calcularDistancia(it.latitude, it.longitude, latitudCordoba, longitudCordoba)
+                }
+                "Zarangollo" -> {
+                    distanciaMurcia = calcularDistancia(it.latitude, it.longitude, latitudMurcia, longitudMurcia)
+                }
+            }
+
+            if (distanciaCiudadReal <= radioDeAlerta || distanciaZamora <= radioDeAlerta || distanciaMurcia <= radioDeAlerta || distanciaCordoba <= radioDeAlerta || distanciaValencia <= radioDeAlerta) {
+                // Configurar el centro en España y el nivel de zoom
+                val geoPointEspana = GeoPoint(latitudCiudadReal, longitudCiudadReal) // Centro aproximado de España
+                mapView.controller.setCenter(geoPointEspana)
+                mapView.controller.setZoom(6.95) // Ajusta el zoom según la vista deseada
+            } else {
+                Toast.makeText(this, "No está cerca de un sitio específico.", Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
         mapView.invalidate()
+
         return true
     }
 
