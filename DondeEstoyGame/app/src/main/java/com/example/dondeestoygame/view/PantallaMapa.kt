@@ -42,16 +42,16 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
     private lateinit var comida:Comida
 
     // Ubicaciones de interés (latitud y longitud)
-    private val latitudCiudadReal = 38.9908
-    private val longitudCiudadReal = -3.9206
-    private val latitudSegovia = 38.6929
-    private val longitudSegovia = -4.1086
-    private val latitudMurcia = 0.00
-    private val longitudMurcia = 0.00
-    private val latitudCordoba = 0.00
-    private val longitudCordoba = 0.00
-    private val latitudValencia = 0.00
-    private val longitudValencia = 0.00
+    private val latitudCiudadReal = 38.9863
+    private val longitudCiudadReal = -3.9291
+    private val latitudSegovia = 40.9429
+    private val longitudSegovia = -4.1184
+    private val latitudMurcia = 38.0000
+    private val longitudMurcia = -1.5000
+    private val latitudCordoba = 37.8882
+    private val longitudCordoba = -4.7794
+    private val latitudValencia = 39.4699
+    private val longitudValencia = -0.3763
     private val radioDeAlerta = 100.0 // Radio en metros
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -359,6 +359,10 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("¡Te equivocaste!")
         builder.setMessage("Está más al " + direccion)
+        builder.setPositiveButton("OK") { dialog, which ->
+            ultimoMarcador?.let { mapView.overlays.remove(it) }
+            ultimoCirculo?.let { mapView.overlays.remove(it) }
+        }
         builder.show()
     }
 
