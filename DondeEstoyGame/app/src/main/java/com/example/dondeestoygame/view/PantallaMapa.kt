@@ -27,12 +27,30 @@ import org.osmdroid.views.overlay.compass.CompassOverlay
 import org.osmdroid.views.overlay.compass.InternalCompassOrientationProvider
 import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
+import kotlin.math.atan2
+import kotlin.math.cos
+import kotlin.math.pow
+import kotlin.math.sin
+import kotlin.math.sqrt
 
 class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
 
     private val MULTIPLE_PERMISSION_REQUEST_CODE: Int = 4
     private lateinit var mapView: MapView
     private lateinit var binding: ActivityPantallaMapaBinding
+
+    // Ubicaciones de interés (latitud y longitud)
+    private val latitudCiudadReal = 38.9908
+    private val longitudCiudadReal = -3.9206
+    private val latitudZamora = 38.6929
+    private val longitudZamora = -4.1086
+    private val latitudMurcia = 0.00
+    private val longitudMurcia = 0.00
+    private val latitudCordoba = 0.00
+    private val longitudCordoba = 0.00
+    private val latitudValencia = 0.00
+    private val longitudValencia = 0.00
+    private val radioDeAlerta = 100.0 // Radio en metros
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -134,7 +152,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
 
     private fun myLocation(){
 
-        var mLocationOverlay = MyLocationNewOverlay(GpsMyLocationProvider(this), mapView)
+        val mLocationOverlay = MyLocationNewOverlay(GpsMyLocationProvider(this), mapView)
         mLocationOverlay.enableMyLocation()
 
         mLocationOverlay.enableFollowLocation()
@@ -154,8 +172,6 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
 
     fun createMarkers(){
         //Crear marcador migas de pastor (Ciudad Real)
-        val latitudCiudadReal = 0
-        val longitudCiudadReal = 0
         val markerCR = Marker(mapView)
         markerCR.position = GeoPoint(latitudCiudadReal, longitudCiudadReal)
         markerCR.title = "Ciudad Real"
@@ -163,8 +179,6 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
         mapView.overlays.add(markerCR)
 
         //Crear marcador sopa_castellana (Zamora)
-        val latitudZamora = 0
-        val longitudZamora = 0
         val markerZamora = Marker(mapView)
         markerZamora.position = GeoPoint(latitudZamora, longitudZamora)
         markerZamora.title = "Zamora"
@@ -172,8 +186,6 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
         mapView.overlays.add(markerZamora)
 
         //Crear marcador cocas (Valencia)
-        val latitudValencia = 0
-        val longitudValencia = 0
         val markerValencia = Marker(mapView)
         markerValencia.position = GeoPoint(latitudValencia, longitudValencia)
         markerValencia.title = "Valencia"
@@ -181,8 +193,6 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
         mapView.overlays.add(markerValencia)
 
         //Crear marcador salmorejo (Córdoba)
-        val latitudCordoba = 0
-        val longitudCordoba = 0
         val markerCordoba = Marker(mapView)
         markerCordoba.position = GeoPoint(latitudCordoba, longitudCordoba)
         markerCordoba.title = "Córdoba"
@@ -190,8 +200,6 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
         mapView.overlays.add(markerCordoba)
 
         //Crear marcador zarangollo (Murcia)
-        val latitudMurcia = 0
-        val longitudMurcia = 0
         val markerMurcia = Marker(mapView)
         markerMurcia.position = GeoPoint(latitudMurcia, longitudMurcia)
         markerMurcia.title = "Murcia"
@@ -201,6 +209,23 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
     }
 
     override fun singleTapConfirmedHelper(point: GeoPoint?): Boolean {
+
+        point?.let {
+            // Verificar si la distancia con alguno de los marcadores es menor a 100 metros
+            val distanciaCiudadReal = calcularDistancia(it.latitude, it.longitude, latitudCiudadReal, longitudCiudadReal)
+            val distanciaZamora = calcularDistancia(it.latitude, it.longitude, latitudZamora, longitudZamora)
+            val distanciaMurcia = calcularDistancia(it.latitude, it.longitude, latitudMurcia, longitudMurcia)
+            val distanciaCordoba = calcularDistancia(it.latitude, it.longitude, latitudCordoba, longitudCordoba)
+            val distanciaValencia = calcularDistancia(it.latitude, it.longitude, latitudValencia, longitudValencia)
+
+            if (distanciaCiudadReal <= radioDeAlerta || distanciaZamora <= radioDeAlerta || distanciaMurcia <= radioDeAlerta || distanciaCordoba <= radioDeAlerta || distanciaValencia <= radioDeAlerta) {
+               //Ampliar a zona exacta.
+            } else {
+                Toast.makeText(this, "No está cerca de un sitio específico.", Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
+
         //Maneja el evento clic del mapa
         //Agregar marcador
         val marker = Marker(mapView)
@@ -221,6 +246,15 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
 
     override fun longPressHelper(point: GeoPoint?): Boolean {
         return false
+    }
+
+    private fun calcularDistancia(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {
+        val radioTierra = 6371000.0 // Radio de la Tierra en metros
+        val dLat = Math.toRadians(lat2 - lat1)
+        val dLon = Math.toRadians(lon2 - lon1)
+        val a = sin(dLat / 2).pow(2.0) + cos(Math.toRadians(lat1)) * cos(Math.toRadians(lat2)) * sin(dLon / 2).pow(2.0)
+        val c = 2 * atan2(sqrt(a), sqrt(1 - a))
+        return radioTierra * c // Distancia en metros
     }
 
 }
