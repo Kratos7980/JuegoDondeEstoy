@@ -136,17 +136,20 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
 
         mapView.overlays.add(MapEventsOverlay(this))
 
-        var compassOverlay = CompassOverlay(this, InternalCompassOrientationProvider(this), mapView)
+        val compassOverlay = CompassOverlay(this, InternalCompassOrientationProvider(this), mapView)
         compassOverlay.enableCompass()
         mapView.overlays.add(compassOverlay)
 
         val dm: DisplayMetrics = this.resources.displayMetrics
         val scaleBarOverlay = ScaleBarOverlay(mapView)
         scaleBarOverlay.setCentred(true)
-
         scaleBarOverlay.setScaleBarOffset(dm.widthPixels / 2, 40)
         mapView.overlays.add(scaleBarOverlay)
 
+        // Configurar el centro en España y el nivel de zoom
+        val geoPointEspana = GeoPoint(40.0, -3.5) // Centro aproximado de España
+        mapView.controller.setCenter(geoPointEspana)
+        mapView.controller.setZoom(5.5) // Ajusta el zoom según la vista deseada
 
     }
 
