@@ -243,6 +243,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                     if(distanciaCiudadReal <= radioDeAlerta){
                         createMarkerCiudadReal()
                         ampliarMapa(latitudCiudadReal, longitudCiudadReal)
+                        Toast.makeText(this, "Has acertado la ubicación", Toast.LENGTH_SHORT).show()
                     }else{
                         direccion = calcularDireccion(it.latitude, it.longitude, latitudCiudadReal, longitudCiudadReal)
                         mostrarAlerta(direccion)

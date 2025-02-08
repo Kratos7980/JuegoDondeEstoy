@@ -20,7 +20,7 @@
         android:theme="@style/Theme.DondeEstoyGame"
         tools:targetApi="31" >
         <activity
-            android:name=".ActivityInformacion"
+            android:name=".view.ActivityInformacion"
             android:exported="false" />
         <activity
             android:name=".view.PantallaMapa"

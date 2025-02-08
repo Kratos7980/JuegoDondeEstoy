@@ -6,9 +6,25 @@ import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.example.dondeestoygame.R
 import com.example.dondeestoygame.modelo.Comida
 
-class InformacionAdapter(private val comidas: MutableList<Comida>): Adapter<ImagenViewHolder>() {
+class InformacionAdapter(private val comidas: List<Comida>): Adapter<ImagenViewHolder>() {
 
-    private val selectedItems = mutableListOf<Int>()
+    private var posSelectedItem: Int = -1
+    private var data:List<Comida>
+    init {
+        data = comidas
+    }
+
+    fun updateData(newData: List<Comida>) {
+        this.data = newData
+        notifyItemChanged(0, data.size-1)
+        notifyDataSetChanged()
+    }
+
+    fun getSelectedItem(): Int {
+        return posSelectedItem
+    }
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImagenViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -16,7 +32,7 @@ class InformacionAdapter(private val comidas: MutableList<Comida>): Adapter<Imag
     }
 
     override fun getItemCount(): Int {
-        return comidas.size
+        return data.size
     }
 
     override fun onBindViewHolder(holder: ImagenViewHolder, position: Int) {
