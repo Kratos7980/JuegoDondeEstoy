@@ -33,15 +33,19 @@ class ComidaAdapter (private val listComida: ArrayList<Comida>, private val cont
         //Definir onClick de los items
         holder.itemView.setOnClickListener {
             if(Informacion.getAcertado()){
-                val intent: Intent = Intent(context, MirarVideos::class.java)
+                val intent = Intent(context, MirarVideos::class.java)
+                val bundle = Bundle()
+                bundle.putSerializable("comida", comida)
+                intent.putExtra("data", bundle)
+                context.startActivity(intent)
+            }else {
+                val intent = Intent(context, PantallaMapa::class.java)
+                val bundle = Bundle()
+                bundle.putSerializable("comida", comida)
+                intent.putExtra("data", bundle)
+
                 context.startActivity(intent)
             }
-            val intent = Intent(context, PantallaMapa::class.java)
-            val bundle = Bundle()
-            bundle.putSerializable("comida", comida)
-            intent.putExtra("data", bundle)
-
-            context.startActivity(intent)
         }
 
     }
