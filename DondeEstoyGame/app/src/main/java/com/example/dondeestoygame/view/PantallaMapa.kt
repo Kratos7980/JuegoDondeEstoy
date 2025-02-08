@@ -227,27 +227,64 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
     private var ultimoCirculo: Polygon? = null
 
     override fun singleTapConfirmedHelper(point: GeoPoint?): Boolean {
-        var distanciaCiudadReal = radioDeAlerta + 1
-        var distanciaZamora = radioDeAlerta + 1
-        var distanciaMurcia = radioDeAlerta + 1
-        var distanciaCordoba = radioDeAlerta + 1
-        var distanciaValencia = radioDeAlerta + 1
+        val distanciaCiudadReal:Double
+        val distanciaZamora:Double
+        val distanciaMurcia:Double
+        val distanciaCordoba:Double
+        val distanciaValencia:Double
 
         point?.let {
             // Verificar si la distancia con alguno de los marcadores es menor a 100 metros
-            val distanciaCiudadReal = calcularDistancia(it.latitude, it.longitude, latitudCiudadReal, longitudCiudadReal)
-            val distanciaZamora = calcularDistancia(it.latitude, it.longitude, latitudZamora, longitudZamora)
-            val distanciaMurcia = calcularDistancia(it.latitude, it.longitude, latitudMurcia, longitudMurcia)
-            val distanciaCordoba = calcularDistancia(it.latitude, it.longitude, latitudCordoba, longitudCordoba)
-            val distanciaValencia = calcularDistancia(it.latitude, it.longitude, latitudValencia, longitudValencia)
-
-            if (distanciaCiudadReal <= radioDeAlerta || distanciaZamora <= radioDeAlerta || distanciaMurcia <= radioDeAlerta || distanciaCordoba <= radioDeAlerta || distanciaValencia <= radioDeAlerta) {
-               //Ampliar a zona exacta.
-            } else {
-                Toast.makeText(this, "No está cerca de un sitio específico.", Toast.LENGTH_SHORT)
-                    .show()
+            when(comida.title){
+                "Migas de pastor" ->{
+                    distanciaCiudadReal = calcularDistancia(it.latitude, it.longitude, latitudCiudadReal, longitudCiudadReal)
+                    if(distanciaCiudadReal <= radioDeAlerta){
+                        createMarkerCiudadReal()
+                        ampliarMapa(latitudCiudadReal, longitudCiudadReal)
+                    }else{
+                        // Alerta pista de posición real.
+                    }
+                }
+                "Sopa de ajo" ->{
+                    distanciaZamora = calcularDistancia(it.latitude, it.longitude, latitudZamora, longitudZamora)
+                    if(distanciaZamora <= radioDeAlerta){
+                        createMarkerZamora()
+                        ampliarMapa(latitudZamora, longitudZamora)
+                    }else{
+                        // Alerta pista de posición real.
+                    }
+                }
+                "Cocas" ->{
+                    distanciaValencia = calcularDistancia(it.latitude, it.longitude, latitudValencia, longitudValencia)
+                    if(distanciaValencia <= radioDeAlerta){
+                        createMarkerValencia()
+                        ampliarMapa(latitudValencia, longitudValencia)
+                    }else{
+                        //Alerta pista de posición real.
+                    }
+                }
+                "Salmorejo" -> {
+                    distanciaCordoba = calcularDistancia(it.latitude, it.longitude, latitudCordoba, longitudCordoba)
+                    if(distanciaCordoba <= radioDeAlerta){
+                        createMarkerCordoba()
+                        ampliarMapa(latitudCordoba, longitudCordoba)
+                    }else{
+                        //Alerta pista de posición real.
+                    }
+                }
+                "Zarangollo" -> {
+                    distanciaMurcia = calcularDistancia(it.latitude, it.longitude, latitudMurcia, longitudMurcia)
+                    if(distanciaMurcia <= radioDeAlerta){
+                        createMarketMurcia()
+                        ampliarMapa(latitudMurcia, longitudMurcia)
+                    }else{
+                        //Alerta pista de posición real.
+                    }
+                }
             }
+
         }
+
         // Eliminar el último marcador si existe
         ultimoMarcador?.let { mapView.overlays.remove(it) }
         ultimoCirculo?.let { mapView.overlays.remove(it) }
@@ -270,38 +307,6 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
         mapView.overlays.add(circle)
         ultimoCirculo = circle
 
-        point?.let {
-            // Verificar si la distancia con alguno de los marcadores es menor a 100 metros
-            when(comida.title){
-                "Migas de pastor" ->{
-                    distanciaCiudadReal = calcularDistancia(it.latitude, it.longitude, latitudCiudadReal, longitudCiudadReal)
-                }
-                "Sopa de ajo" ->{
-                    distanciaZamora = calcularDistancia(it.latitude, it.longitude, latitudZamora, longitudZamora)
-                }
-                "Cocas" ->{
-                    distanciaValencia = calcularDistancia(it.latitude, it.longitude, latitudValencia, longitudValencia)
-                }
-                "Salmorejo" -> {
-                    distanciaCordoba = calcularDistancia(it.latitude, it.longitude, latitudCordoba, longitudCordoba)
-                }
-                "Zarangollo" -> {
-                    distanciaMurcia = calcularDistancia(it.latitude, it.longitude, latitudMurcia, longitudMurcia)
-                }
-            }
-
-            if (distanciaCiudadReal <= radioDeAlerta || distanciaZamora <= radioDeAlerta || distanciaMurcia <= radioDeAlerta || distanciaCordoba <= radioDeAlerta || distanciaValencia <= radioDeAlerta) {
-                // Configurar el centro en España y el nivel de zoom
-                val geoPointEspana = GeoPoint(latitudCiudadReal, longitudCiudadReal) // Centro aproximado de España
-                mapView.controller.setCenter(geoPointEspana)
-                mapView.controller.setZoom(6.95) // Ajusta el zoom según la vista deseada
-            } else {
-                Toast.makeText(this, "No está cerca de un sitio específico.", Toast.LENGTH_SHORT)
-                    .show()
-            }
-        }
-        // Eliminar el último marcador si existe
-
         mapView.invalidate()
 
         return true
@@ -318,6 +323,13 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
         val a = sin(dLat / 2).pow(2.0) + cos(Math.toRadians(lat1)) * cos(Math.toRadians(lat2)) * sin(dLon / 2).pow(2.0)
         val c = 2 * atan2(sqrt(a), sqrt(1 - a))
         return radioTierra * c // Distancia en metros
+    }
+
+    fun ampliarMapa(latitud:Double, longitud:Double){
+        // Configurar el centro en España y el nivel de zoom
+        val geoPointEspana = GeoPoint(latitud, longitud) // Centro aproximado de España
+        mapView.controller.setCenter(geoPointEspana)
+        mapView.controller.setZoom(6.95) // Ajusta el zoom según la vista deseada
     }
 
 }
