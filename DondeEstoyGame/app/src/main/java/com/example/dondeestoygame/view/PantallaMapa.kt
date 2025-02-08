@@ -155,22 +155,22 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
 
     private fun myLocation(){
 
-        val mLocationOverlay = MyLocationNewOverlay(GpsMyLocationProvider(this), mapView)
-        mLocationOverlay.enableMyLocation()
-
-        mLocationOverlay.enableFollowLocation()
-
-        val icon = BitmapFactory.decodeResource(resources, R.drawable.baseline_location_pin_24)
-        mLocationOverlay.setDirectionIcon(icon)
-        mLocationOverlay.runOnFirstFix{
-            runOnUiThread{
-                mapView.controller.setCenter(mLocationOverlay.myLocation)
-                mapView.controller.animateTo(mLocationOverlay.myLocation)
-                mapView.controller.setZoom(18.0)
-                mapView.invalidate()
-            }
-        }
-        mapView.overlays.add(mLocationOverlay)
+//        val mLocationOverlay = MyLocationNewOverlay(GpsMyLocationProvider(this), mapView)
+//        mLocationOverlay.enableMyLocation()
+//
+//        mLocationOverlay.enableFollowLocation()
+//
+//        val icon = BitmapFactory.decodeResource(resources, R.drawable.baseline_location_pin_24)
+//        mLocationOverlay.setDirectionIcon(icon)
+//        mLocationOverlay.runOnFirstFix{
+//            runOnUiThread{
+//                mapView.controller.setCenter(mLocationOverlay.myLocation)
+//                mapView.controller.animateTo(mLocationOverlay.myLocation)
+//                mapView.controller.setZoom(18.0)
+//                mapView.invalidate()
+//            }
+//        }
+//        mapView.overlays.add(mLocationOverlay)
     }
 
     fun createMarkers(){
