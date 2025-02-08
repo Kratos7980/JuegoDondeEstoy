@@ -1,6 +1,7 @@
 package com.example.dondeestoygame.view
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.graphics.Color
@@ -243,6 +244,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                     if(distanciaCiudadReal <= radioDeAlerta){
                         createMarkerCiudadReal()
                         ampliarMapa(latitudCiudadReal, longitudCiudadReal)
+                        mostrarAcierto("Ciudad Real", comida.title)
                     }else{
                         direccion = calcularDireccion(it.latitude, it.longitude, latitudCiudadReal, longitudCiudadReal)
                         mostrarAlerta(direccion)
@@ -253,6 +255,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                     if(distanciaSegovia <= radioDeAlerta){
                         createMarkerSegovia()
                         ampliarMapa(latitudSegovia, longitudSegovia)
+                        mostrarAcierto("Segovia", comida.title)
                     }else{
                         direccion = calcularDireccion(it.latitude, it.longitude, latitudSegovia, longitudSegovia)
                         mostrarAlerta(direccion)
@@ -263,6 +266,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                     if(distanciaValencia <= radioDeAlerta){
                         createMarkerValencia()
                         ampliarMapa(latitudValencia, longitudValencia)
+                        mostrarAcierto("Valencia", comida.title)
                     }else{
                         direccion = calcularDireccion(it.latitude,it.longitude, latitudValencia, longitudValencia)
                         mostrarAlerta(direccion)
@@ -273,6 +277,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                     if(distanciaCordoba <= radioDeAlerta){
                         createMarkerCordoba()
                         ampliarMapa(latitudCordoba, longitudCordoba)
+                        mostrarAcierto("Córdoba", comida.title)
                     }else{
                         direccion = calcularDireccion(it.latitude, it.longitude, latitudCordoba, longitudCordoba)
                         mostrarAlerta(direccion)
@@ -283,6 +288,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                     if(distanciaMurcia <= radioDeAlerta){
                         createMarketMurcia()
                         ampliarMapa(latitudMurcia, longitudMurcia)
+                        mostrarAcierto("Murcia", comida.title)
                     }else{
                         direccion = calcularDireccion(it.latitude, it.longitude, latitudMurcia, longitudMurcia)
                         mostrarAlerta(direccion)
@@ -348,7 +354,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
     }
 
     fun ampliarMapa(latitud:Double, longitud:Double){
-        
+
         // Configurar el centro en España y el nivel de zoom
         val geoPointEspana = GeoPoint(latitud, longitud) // Centro aproximado de España
         mapView.controller.setCenter(geoPointEspana)
@@ -363,6 +369,34 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
         builder.setPositiveButton("OK") { dialog, which ->
             ultimoMarcador?.let { mapView.overlays.remove(it) }
             ultimoCirculo?.let { mapView.overlays.remove(it) }
+        }
+        builder.show()
+    }
+
+    private fun mostrarAcierto(nombreCiudad:String, nombreComida:String) {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("¡ACERTASTE!")
+        builder.setMessage(nombreComida + " es una comida típica de " + nombreCiudad)
+        when(nombreComida){
+            "Migas de pastor" -> {
+                builder.setIcon(R.drawable.migas)
+            }
+            "Sopa de ajo" -> {
+                builder.setIcon(R.drawable.sopa_castellana)
+            }
+            "Cocas" -> {
+                builder.setIcon(R.drawable.cocas)
+            }
+            "Salmorejo" -> {
+                builder.setIcon(R.drawable.salmorejo)
+            }
+            "Zarangollo" -> {
+                builder.setIcon(R.drawable.zarangollo)
+            }
+        }
+        builder.setPositiveButton("OK") { dialog, which ->
+            val intent = Intent(this, PantallaPrincipal::class.java)
+            startActivity(intent)
         }
         builder.show()
     }
