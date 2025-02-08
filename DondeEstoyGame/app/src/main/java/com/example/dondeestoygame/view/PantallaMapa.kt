@@ -224,13 +224,36 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
 
 
     private var ultimoMarcador: Marker? = null
+    private var ultimoCirculo: Polygon? = null
 
     override fun singleTapConfirmedHelper(point: GeoPoint?): Boolean {
+<<<<<<< Updated upstream
         var distanciaCiudadReal = radioDeAlerta + 1
         var distanciaZamora = radioDeAlerta + 1
         var distanciaMurcia = radioDeAlerta + 1
         var distanciaCordoba = radioDeAlerta + 1
         var distanciaValencia = radioDeAlerta + 1
+=======
+
+        point?.let {
+            // Verificar si la distancia con alguno de los marcadores es menor a 100 metros
+            val distanciaCiudadReal = calcularDistancia(it.latitude, it.longitude, latitudCiudadReal, longitudCiudadReal)
+            val distanciaZamora = calcularDistancia(it.latitude, it.longitude, latitudZamora, longitudZamora)
+            val distanciaMurcia = calcularDistancia(it.latitude, it.longitude, latitudMurcia, longitudMurcia)
+            val distanciaCordoba = calcularDistancia(it.latitude, it.longitude, latitudCordoba, longitudCordoba)
+            val distanciaValencia = calcularDistancia(it.latitude, it.longitude, latitudValencia, longitudValencia)
+
+            if (distanciaCiudadReal <= radioDeAlerta || distanciaZamora <= radioDeAlerta || distanciaMurcia <= radioDeAlerta || distanciaCordoba <= radioDeAlerta || distanciaValencia <= radioDeAlerta) {
+               //Ampliar a zona exacta.
+            } else {
+                Toast.makeText(this, "No está cerca de un sitio específico.", Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
+        // Eliminar el último marcador si existe
+        ultimoMarcador?.let { mapView.overlays.remove(it) }
+        ultimoCirculo?.let { mapView.overlays.remove(it) }
+>>>>>>> Stashed changes
 
         //Maneja el evento clic del mapa
         //Agregar marcador
@@ -248,6 +271,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
         circle.fillPaint.color = Color.argb(50,0,0,255)
         circle.fillPaint.strokeWidth = 2.0f
         mapView.overlays.add(circle)
+        ultimoCirculo = circle
 
         point?.let {
             // Verificar si la distancia con alguno de los marcadores es menor a 100 metros
