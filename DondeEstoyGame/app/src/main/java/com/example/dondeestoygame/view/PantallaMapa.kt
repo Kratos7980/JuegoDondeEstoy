@@ -1,6 +1,7 @@
 package com.example.dondeestoygame.view
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.graphics.Color
@@ -16,6 +17,7 @@ import androidx.core.content.ContextCompat
 import com.example.dondeestoygame.R
 import com.example.dondeestoygame.databinding.ActivityPantallaMapaBinding
 import com.example.dondeestoygame.modelo.Comida
+import com.example.dondeestoygame.modelo.Informacion
 import org.osmdroid.events.MapEventsReceiver
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
@@ -243,8 +245,11 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                     if(distanciaCiudadReal <= radioDeAlerta){
                         createMarkerCiudadReal()
                         ampliarMapa(latitudCiudadReal, longitudCiudadReal)
-                        Toast.makeText(this, "Has acertado la ubicación", Toast.LENGTH_SHORT).show()
+                        sumarPuntos()
+                        Informacion.addComida(comida)
+                        mostrarAcierto("Ciudad Real");
                     }else{
+                        Informacion.restarIntentos(1)
                         direccion = calcularDireccion(it.latitude, it.longitude, latitudCiudadReal, longitudCiudadReal)
                         mostrarAlerta(direccion)
                     }
@@ -254,6 +259,9 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                     if(distanciaSegovia <= radioDeAlerta){
                         createMarkerSegovia()
                         ampliarMapa(latitudSegovia, longitudSegovia)
+                        sumarPuntos()
+                        Informacion.addComida(comida)
+                        mostrarAcierto("Segovia");
                     }else{
                         direccion = calcularDireccion(it.latitude, it.longitude, latitudSegovia, longitudSegovia)
                         mostrarAlerta(direccion)
@@ -264,6 +272,9 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                     if(distanciaValencia <= radioDeAlerta){
                         createMarkerValencia()
                         ampliarMapa(latitudValencia, longitudValencia)
+                        sumarPuntos()
+                        Informacion.addComida(comida)
+                        mostrarAcierto("Valencia");
                     }else{
                         direccion = calcularDireccion(it.latitude,it.longitude, latitudValencia, longitudValencia)
                         mostrarAlerta(direccion)
@@ -274,6 +285,9 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                     if(distanciaCordoba <= radioDeAlerta){
                         createMarkerCordoba()
                         ampliarMapa(latitudCordoba, longitudCordoba)
+                        sumarPuntos()
+                        Informacion.addComida(comida)
+                        mostrarAcierto("Córdoba");
                     }else{
                         direccion = calcularDireccion(it.latitude, it.longitude, latitudCordoba, longitudCordoba)
                         mostrarAlerta(direccion)
@@ -284,6 +298,9 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                     if(distanciaMurcia <= radioDeAlerta){
                         createMarketMurcia()
                         ampliarMapa(latitudMurcia, longitudMurcia)
+                        sumarPuntos()
+                        Informacion.addComida(comida)
+                        mostrarAcierto("Murcia");
                     }else{
                         direccion = calcularDireccion(it.latitude, it.longitude, latitudMurcia, longitudMurcia)
                         mostrarAlerta(direccion)
@@ -366,6 +383,35 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
             ultimoCirculo?.let { mapView.overlays.remove(it) }
         }
         builder.show()
+    }
+
+    private fun mostrarAcierto(nombreCiudad:String){
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("¡ACERTASTE!")
+        builder.setMessage( comida.title + " es un plato típico de " + nombreCiudad)
+        when(comida.title){
+            "Migas de pastor" -> builder.setIcon(R.drawable.migas)
+            "Sopa de ajo" -> builder.setIcon(R.drawable.sopa_castellana)
+            "Cocas" -> builder.setIcon(R.drawable.cocas)
+            "Salmorejo" -> builder.setIcon(R.drawable.salmorejo)
+            "Zarangollo" -> builder.setIcon(R.drawable.zarangollo)
+        }
+        builder.setPositiveButton("OK") { dialog, which ->
+            val intent = Intent(this, PantallaPrincipal::class.java)
+            startActivity(intent)
+        }
+        builder.show()
+    }
+
+    private fun sumarPuntos(){
+        val intentos = Informacion.getIntentos()
+        when(intentos){
+            5 -> Informacion.sumarPuntos(100)
+            4 -> Informacion.sumarPuntos(75)
+            3 -> Informacion.sumarPuntos(50)
+            2 -> Informacion.sumarPuntos(25)
+            1 -> Informacion.sumarPuntos(10)
+        }
     }
 
 }
