@@ -43,8 +43,8 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
     // Ubicaciones de interés (latitud y longitud)
     private val latitudCiudadReal = 38.9908
     private val longitudCiudadReal = -3.9206
-    private val latitudZamora = 38.6929
-    private val longitudZamora = -4.1086
+    private val latitudSegovia = 38.6929
+    private val longitudSegovia = -4.1086
     private val latitudMurcia = 0.00
     private val longitudMurcia = 0.00
     private val latitudCordoba = 0.00
@@ -186,10 +186,10 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
         mapView.overlays.add(markerCR)
 
     }
-    fun createMarkerZamora(){
+    fun createMarkerSegovia(){
         //Crear marcador sopa_castellana (Zamora)
         val markerZamora = Marker(mapView)
-        markerZamora.position = GeoPoint(latitudZamora, longitudZamora)
+        markerZamora.position = GeoPoint(latitudSegovia, longitudSegovia)
         markerZamora.title = "Zamora"
         markerZamora.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
         mapView.overlays.add(markerZamora)
@@ -228,7 +228,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
 
     override fun singleTapConfirmedHelper(point: GeoPoint?): Boolean {
         val distanciaCiudadReal:Double
-        val distanciaZamora:Double
+        val distanciaSegovia:Double
         val distanciaMurcia:Double
         val distanciaCordoba:Double
         val distanciaValencia:Double
@@ -236,7 +236,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
         point?.let {
             // Verificar si la distancia con alguno de los marcadores es menor a 100 metros
             when(comida.title){
-                "Migas de pastor" ->{
+                "Migas de pastor" -> {
                     distanciaCiudadReal = calcularDistancia(it.latitude, it.longitude, latitudCiudadReal, longitudCiudadReal)
                     if(distanciaCiudadReal <= radioDeAlerta){
                         createMarkerCiudadReal()
@@ -245,16 +245,16 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                         // Alerta pista de posición real.
                     }
                 }
-                "Sopa de ajo" ->{
-                    distanciaZamora = calcularDistancia(it.latitude, it.longitude, latitudZamora, longitudZamora)
-                    if(distanciaZamora <= radioDeAlerta){
-                        createMarkerZamora()
-                        ampliarMapa(latitudZamora, longitudZamora)
+                "Sopa de ajo" -> {
+                    distanciaSegovia = calcularDistancia(it.latitude, it.longitude, latitudSegovia, longitudSegovia)
+                    if(distanciaSegovia <= radioDeAlerta){
+                        createMarkerSegovia()
+                        ampliarMapa(latitudSegovia, longitudSegovia)
                     }else{
                         // Alerta pista de posición real.
                     }
                 }
-                "Cocas" ->{
+                "Cocas" -> {
                     distanciaValencia = calcularDistancia(it.latitude, it.longitude, latitudValencia, longitudValencia)
                     if(distanciaValencia <= radioDeAlerta){
                         createMarkerValencia()
@@ -323,6 +323,22 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
         val a = sin(dLat / 2).pow(2.0) + cos(Math.toRadians(lat1)) * cos(Math.toRadians(lat2)) * sin(dLon / 2).pow(2.0)
         val c = 2 * atan2(sqrt(a), sqrt(1 - a))
         return radioTierra * c // Distancia en metros
+    }
+
+    private fun calcularDirección(lat1:Double, lon1:Double, lat2:Double lon2:Double):String{
+        // Determinar dirección
+        val direccion = when {
+            lat2 > lat1 && lon2 > lon1 -> "Noreste"
+            lat2 > lat1 && lon2 < lon1 -> "Noroeste"
+            lat2 < lat1 && lon2 > lon1 -> "Sureste"
+            lat2 < lat1 && lon2 < lon1 -> "Suroeste"
+            lat2 > lat1 -> "Norte"
+            lat2 < lat1 -> "Sur"
+            lon2 > lon1 -> "Este"
+            lon2 < lon1 -> "Oeste"
+            else -> "Misma ubicación"
+        }
+        return direccion
     }
 
     fun ampliarMapa(latitud:Double, longitud:Double){
