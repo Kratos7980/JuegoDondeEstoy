@@ -34,6 +34,7 @@ class ComidaAdapter (private val listComida: ArrayList<Comida>, private val cont
             val bundle = Bundle()
             bundle.putSerializable("comida", comida)
             intent.putExtra("data", bundle)
+
             context.startActivity(intent)
         }
 
