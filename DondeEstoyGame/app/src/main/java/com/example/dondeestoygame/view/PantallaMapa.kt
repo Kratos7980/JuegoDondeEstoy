@@ -227,13 +227,11 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
     private var ultimoCirculo: Polygon? = null
 
     override fun singleTapConfirmedHelper(point: GeoPoint?): Boolean {
-<<<<<<< Updated upstream
         var distanciaCiudadReal = radioDeAlerta + 1
         var distanciaZamora = radioDeAlerta + 1
         var distanciaMurcia = radioDeAlerta + 1
         var distanciaCordoba = radioDeAlerta + 1
         var distanciaValencia = radioDeAlerta + 1
-=======
 
         point?.let {
             // Verificar si la distancia con alguno de los marcadores es menor a 100 metros
@@ -253,7 +251,6 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
         // Eliminar el último marcador si existe
         ultimoMarcador?.let { mapView.overlays.remove(it) }
         ultimoCirculo?.let { mapView.overlays.remove(it) }
->>>>>>> Stashed changes
 
         //Maneja el evento clic del mapa
         //Agregar marcador
@@ -304,7 +301,6 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
             }
         }
         // Eliminar el último marcador si existe
-        ultimoMarcador?.let { mapView.overlays.remove(it) }
 
         mapView.invalidate()
 
