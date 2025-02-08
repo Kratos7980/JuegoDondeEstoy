@@ -16,7 +16,7 @@ class MirarVideos : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+
         binding = ActivityMirarVideosBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val bundle = intent.getBundleExtra("data")

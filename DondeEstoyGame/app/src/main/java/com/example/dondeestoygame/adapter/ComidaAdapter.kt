@@ -9,6 +9,8 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dondeestoygame.R
 import com.example.dondeestoygame.modelo.Comida
+import com.example.dondeestoygame.modelo.Informacion
+import com.example.dondeestoygame.view.MirarVideos
 import com.example.dondeestoygame.view.PantallaMapa
 
 class ComidaAdapter (private val listComida: ArrayList<Comida>, private val context: Context): RecyclerView.Adapter<ComidaViewHolder>() {
@@ -30,6 +32,10 @@ class ComidaAdapter (private val listComida: ArrayList<Comida>, private val cont
 
         //Definir onClick de los items
         holder.itemView.setOnClickListener {
+            if(Informacion.getAcertado()){
+                val intent: Intent = Intent(context, MirarVideos::class.java)
+                context.startActivity(intent)
+            }
             val intent = Intent(context, PantallaMapa::class.java)
             val bundle = Bundle()
             bundle.putSerializable("comida", comida)
