@@ -24,8 +24,6 @@ class InformacionAdapter(private val comidas: List<Comida>): Adapter<ImagenViewH
         return posSelectedItem
     }
 
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImagenViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return ImagenViewHolder(layoutInflater.inflate(R.layout.item_puntuacion, parent, false))
