@@ -7,4 +7,7 @@
         <item name="android:textColorPrimary">#FFFFFF</item>
         <item name="android:textColorSecondary">#FFFFFF</item>
     </style>
+    <style name="PreferenceThemeCustom" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
 </resources>

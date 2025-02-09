@@ -2,10 +2,8 @@ package com.example.dondeestoygame.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.ContextMenu
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dondeestoygame.R
@@ -46,13 +44,13 @@ class PantallaPrincipal : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
             R.id.item_settings ->{
-//                val intent = Intent(this, Settings::class.java)
-//                startActivity(intent);
+                val intent = Intent(this, ActivityPreference::class.java)
+                startActivity(intent);
                 true
             }
             R.id.item_info ->{
-//                val intent = Intent(this, PantallaInfo::class.java)
-//                startActivity(intent)
+                val intent = Intent(this, AcercaDeActivity::class.java)
+                startActivity(intent)
                 true
             }
             R.id.item_puntuacion ->{
