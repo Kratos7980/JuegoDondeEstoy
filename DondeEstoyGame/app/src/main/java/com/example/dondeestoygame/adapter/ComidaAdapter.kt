@@ -32,7 +32,7 @@ class ComidaAdapter (private val listComida: ArrayList<Comida>, private val cont
 
         //Definir onClick de los items
         holder.itemView.setOnClickListener {
-            if(Informacion.getListComida().contains(comida)){
+            if(Informacion.getListComida().contains(comida) || Informacion.getIntentos()==0){
                 val intent = Intent(context, MirarVideos::class.java)
                 val bundle = Bundle()
                 bundle.putSerializable("comida", comida)

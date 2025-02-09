@@ -241,14 +241,6 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                     distanciaSegovia = calcularDistancia(it.latitude, it.longitude, latitudSegovia, longitudSegovia)
                     if(distanciaSegovia <= radioDeAlerta){
 
-                        // Iniciar sonido desde res/raw
-                        val mediaPlayer = MediaPlayer.create(this, R.raw.celebracion)
-                        mediaPlayer?.start()
-
-                        // Opcional: Liberar recursos cuando el sonido termine
-                        mediaPlayer?.setOnCompletionListener {
-                            it.release()
-                        }
 
                         createMarkerSegovia()
                         ampliarMapa(latitudSegovia, longitudSegovia)
@@ -321,7 +313,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                 }
             }
         }
-        if (Informacion.getPuntos() >= 5) {
+        if (Informacion.getPuntos() == 5) {
             if (Informacion.getSonido()) {
                 val mediaPlayer = MediaPlayer.create(this, R.raw.celebracion)
                 mediaPlayer?.start()
@@ -447,6 +439,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
             val intent = Intent(this, PantallaPrincipal::class.java)
             startActivity(intent)
         }
+        builder.show()
     }
 
 }
