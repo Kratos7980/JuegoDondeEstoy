@@ -322,7 +322,13 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
             }
         }
         if (Informacion.getPuntos() >= 5) {
-
+            if (Informacion.getSonido()) {
+                val mediaPlayer = MediaPlayer.create(this, R.raw.celebracion)
+                mediaPlayer?.start()
+                mediaPlayer?.setOnCompletionListener {
+                    it.release()
+                }
+            }
         }
         // Eliminar el último marcador si existe
         ultimoMarcador?.let { mapView.overlays.remove(it) }

@@ -19,6 +19,10 @@ object Informacion {
         sonido = false
     }
 
+    fun getSonido(): Boolean {
+        return sonido
+    }
+
 
     fun getPuntos(): Int {
         return puntos
