@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.Rect
+import android.media.MediaPlayer
 import org.osmdroid.config.Configuration
 import android.os.Bundle
 import android.util.DisplayMetrics
@@ -239,6 +240,16 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                 "Sopa de ajo" -> {
                     distanciaSegovia = calcularDistancia(it.latitude, it.longitude, latitudSegovia, longitudSegovia)
                     if(distanciaSegovia <= radioDeAlerta){
+
+                        // Iniciar sonido desde res/raw
+                        val mediaPlayer = MediaPlayer.create(this, R.raw.celebracion)
+                        mediaPlayer?.start()
+
+                        // Opcional: Liberar recursos cuando el sonido termine
+                        mediaPlayer?.setOnCompletionListener {
+                            it.release()
+                        }
+
                         createMarkerSegovia()
                         ampliarMapa(latitudSegovia, longitudSegovia)
                         sumarPuntos()
@@ -310,7 +321,9 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                 }
             }
         }
+        if (Informacion.getPuntos() >= 5) {
 
+        }
         // Eliminar el último marcador si existe
         ultimoMarcador?.let { mapView.overlays.remove(it) }
         ultimoCirculo?.let { mapView.overlays.remove(it) }
@@ -401,7 +414,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
 
 
 
-        
+
         builder.setPositiveButton("OK") { dialog, which ->
             val intent = Intent(this, PantallaPrincipal::class.java)
             startActivity(intent)

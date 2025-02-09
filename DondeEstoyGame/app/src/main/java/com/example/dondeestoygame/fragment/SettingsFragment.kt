@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.preference.PreferenceFragmentCompat
 import com.example.dondeestoygame.R
+import com.example.dondeestoygame.modelo.Informacion
 
 class SettingsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedPreferenceChangeListener {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
@@ -26,8 +27,10 @@ class SettingsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedP
             "pref_sound" -> {
                 val soundEnabled = sharedPreferences?.getBoolean(key, true)
                 if (soundEnabled == true) {
+                    Informacion.activarSonido()
                     Toast.makeText(requireContext(), "Sonido activado", Toast.LENGTH_SHORT).show()
                 } else {
+                    Informacion.desactivarSonido()
                     Toast.makeText(requireContext(), "Sonido desactivado", Toast.LENGTH_SHORT).show()
                 }
             }
