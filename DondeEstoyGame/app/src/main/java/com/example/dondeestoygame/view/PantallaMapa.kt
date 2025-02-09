@@ -228,11 +228,12 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                         Informacion.addComida(comida)
                         mostrarAcierto("Ciudad Real");
                     }else{
-                        if(Informacion.getIntentos() > 0 ){
+                        if(Informacion.getIntentos() >1 ){
                             Informacion.restarIntentos(1)
                             direccion = calcularDireccion(it.latitude, it.longitude, latitudCiudadReal, longitudCiudadReal)
                             mostrarAlerta(direccion)
                         }else{
+                            Informacion.restarIntentos(1)
                             volverAPrincipal()
                         }
                     }
@@ -248,7 +249,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                         Informacion.addComida(comida)
                         mostrarAcierto("Segovia");
                     }else{
-                        if(Informacion.getIntentos() > 0 ){
+                        if(Informacion.getIntentos() > 1 ){
                             Informacion.restarIntentos(1)
                             direccion = calcularDireccion(it.latitude, it.longitude, latitudCiudadReal, longitudCiudadReal)
                             mostrarAlerta(direccion)
@@ -266,7 +267,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                         Informacion.addComida(comida)
                         mostrarAcierto("Valencia");
                     }else{
-                        if(Informacion.getIntentos() > 0 ){
+                        if(Informacion.getIntentos() > 1 ){
                             Informacion.restarIntentos(1)
                             direccion = calcularDireccion(it.latitude, it.longitude, latitudCiudadReal, longitudCiudadReal)
                             mostrarAlerta(direccion)
@@ -284,7 +285,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                         Informacion.addComida(comida)
                         mostrarAcierto("Córdoba");
                     }else{
-                        if(Informacion.getIntentos() > 0 ){
+                        if(Informacion.getIntentos() > 1 ){
                             Informacion.restarIntentos(1)
                             direccion = calcularDireccion(it.latitude, it.longitude, latitudCiudadReal, longitudCiudadReal)
                             mostrarAlerta(direccion)
@@ -302,7 +303,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                         Informacion.addComida(comida)
                         mostrarAcierto("Murcia");
                     }else{
-                        if(Informacion.getIntentos() > 0 ){
+                        if(Informacion.getIntentos() > 1 ){
                             Informacion.restarIntentos(1)
                             direccion = calcularDireccion(it.latitude, it.longitude, latitudCiudadReal, longitudCiudadReal)
                             mostrarAlerta(direccion)
@@ -365,10 +366,6 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
     private fun calcularDireccion(lat1:Double, lon1:Double, lat2:Double, lon2:Double):String{
         // Determinar dirección
         val direccion = when {
-//            lat2 > lat1 && lon2 > lon1 -> "Noreste"
-//            lat2 > lat1 && lon2 < lon1 -> "Noroeste"
-//            lat2 < lat1 && lon2 > lon1 -> "Sureste"
-//            lat2 < lat1 && lon2 < lon1 -> "Suroeste"
             lat2 > lat1 -> "Norte"
             lat2 < lat1 -> "Sur"
             lon2 > lon1 -> "Este"
@@ -438,6 +435,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
         builder.setPositiveButton("OK") { dialog, which ->
             val intent = Intent(this, PantallaPrincipal::class.java)
             startActivity(intent)
+            finish()
         }
         builder.show()
     }
