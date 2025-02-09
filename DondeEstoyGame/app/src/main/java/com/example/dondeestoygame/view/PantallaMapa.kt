@@ -398,6 +398,10 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
             "Salmorejo" -> builder.setIcon(R.drawable.salmorejo)
             "Zarangollo" -> builder.setIcon(R.drawable.zarangollo)
         }
+
+
+
+        
         builder.setPositiveButton("OK") { dialog, which ->
             val intent = Intent(this, PantallaPrincipal::class.java)
             startActivity(intent)
