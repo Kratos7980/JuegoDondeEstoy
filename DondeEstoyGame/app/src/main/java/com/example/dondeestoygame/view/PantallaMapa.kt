@@ -354,10 +354,10 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
     private fun calcularDireccion(lat1:Double, lon1:Double, lat2:Double, lon2:Double):String{
         // Determinar dirección
         val direccion = when {
-            lat2 > lat1 && lon2 > lon1 -> "Noreste"
-            lat2 > lat1 && lon2 < lon1 -> "Noroeste"
-            lat2 < lat1 && lon2 > lon1 -> "Sureste"
-            lat2 < lat1 && lon2 < lon1 -> "Suroeste"
+//            lat2 > lat1 && lon2 > lon1 -> "Noreste"
+//            lat2 > lat1 && lon2 < lon1 -> "Noroeste"
+//            lat2 < lat1 && lon2 > lon1 -> "Sureste"
+//            lat2 < lat1 && lon2 < lon1 -> "Suroeste"
             lat2 > lat1 -> "Norte"
             lat2 < lat1 -> "Sur"
             lon2 > lon1 -> "Este"

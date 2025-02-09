@@ -24,7 +24,7 @@ class PantallaPrincipal : AppCompatActivity() {
         val toolbar = binding.tbMenu
         setSupportActionBar(toolbar)
 
-        val listComida = ComidaSurtidor.getComida();
+        val listComida = ComidaSurtidor.getComida()
 
         val rv = binding.rvItemsList
 
