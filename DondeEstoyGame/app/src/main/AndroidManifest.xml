@@ -26,7 +26,11 @@
         android:theme="@style/Theme.DondeEstoyGame"
         tools:targetApi="31">
         <activity
+<<<<<<< Updated upstream
             android:name=".ActivityPreference"
+=======
+            android:name=".view.AcercaDeActivity"
+>>>>>>> Stashed changes
             android:exported="false" />
         <activity
             android:name=".view.MirarVideos"

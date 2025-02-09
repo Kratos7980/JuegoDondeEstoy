@@ -1,8 +1,14 @@
 package com.example.dondeestoygame.view
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.ContextMenu
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.dondeestoygame.R
 import com.example.dondeestoygame.adapter.ComidaAdapter
 import com.example.dondeestoygame.databinding.ActivityPantallaPrincipalBinding
 import com.example.dondeestoygame.modelo.ComidaSurtidor
@@ -17,6 +23,8 @@ class PantallaPrincipal : AppCompatActivity() {
         binding = ActivityPantallaPrincipalBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val toolbar = binding.tbMenu
+        setSupportActionBar(toolbar)
 
         val listComida = ComidaSurtidor.getComida();
 
@@ -26,5 +34,33 @@ class PantallaPrincipal : AppCompatActivity() {
         rv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         rv.adapter = myAdapter
 
+
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.item_settings ->{
+//                val intent = Intent(this, Settings::class.java)
+//                startActivity(intent);
+                true
+            }
+            R.id.item_info ->{
+//                val intent = Intent(this, PantallaInfo::class.java)
+//                startActivity(intent)
+                true
+            }
+            R.id.item_puntuacion ->{
+                val intent = Intent(this, ActivityInformacion::class.java)
+                startActivity(intent)
+                true
+            }
+            else -> false
+        }
     }
 }

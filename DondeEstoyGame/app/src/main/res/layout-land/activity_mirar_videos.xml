@@ -12,14 +12,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="VÍDEOS"
+        android:textColor="@color/white"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.044"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:textSize="24sp"
-        android:textColor="@color/white"
-        app:layout_constraintVertical_bias="0.051" />
+        app:layout_constraintVertical_bias="0.005" />
 
     <VideoView
         android:id="@+id/vv"
@@ -27,10 +27,10 @@
         android:layout_height="212dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintHorizontal_bias="0.55"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvVideo"
-        app:layout_constraintVertical_bias="0.113" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/botPlay"
@@ -39,10 +39,10 @@
         android:text="PLAY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.211"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/vv"
-        app:layout_constraintVertical_bias="0.053" />
+        app:layout_constraintVertical_bias="0.102" />
 
     <Button
         android:id="@+id/botPausar"
@@ -51,10 +51,10 @@
         android:text="PAUSAR"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.284"
+        app:layout_constraintHorizontal_bias="0.389"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/vv"
-        app:layout_constraintVertical_bias="0.053" />
+        app:layout_constraintVertical_bias="0.102" />
 
     <Button
         android:id="@+id/botDetener"
@@ -63,10 +63,10 @@
         android:text="STOP"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.981"
+        app:layout_constraintHorizontal_bias="0.889"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/vv"
-        app:layout_constraintVertical_bias="0.053" />
+        app:layout_constraintVertical_bias="0.102" />
 
     <Button
         android:id="@+id/botContinuar"
@@ -75,10 +75,10 @@
         android:text="CONTINUAR"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.669"
+        app:layout_constraintHorizontal_bias="0.698"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/vv"
-        app:layout_constraintVertical_bias="0.053" />
+        app:layout_constraintVertical_bias="0.102" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
