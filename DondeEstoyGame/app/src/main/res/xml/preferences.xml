@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <CheckBoxPreference
+
+        android:defaultValue="true"
+        android:key="pref_sound"
+
+        android:shadowColor="#FFFFFF"
+        android:summary="Esto es para poder activar o desactivar el sonido de los botones"
+        android:textColor="#FFFFFF"
+        android:textColorHighlight="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:textColorLink="#FFFFFF"
+        android:title="Configurar sonido" />
+</PreferenceScreen>

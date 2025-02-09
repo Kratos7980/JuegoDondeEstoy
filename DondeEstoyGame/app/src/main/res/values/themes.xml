@@ -4,6 +4,8 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="android:windowBackground">@drawable/fondo_inicio</item>
+        <item name="android:textColorPrimary">#FFFFFF</item>
+        <item name="android:textColorSecondary">#FFFFFF</item>
     </style>
 
     <style name="Theme.DondeEstoyGame" parent="Base.Theme.DondeEstoyGame" />
@@ -12,4 +14,9 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
+    <style name="PreferenceThemeCustom" parent="Theme.MaterialComponents.DayNight">
+        <item name="android:textColorPrimary">#FFFFFF</item>
+        <item name="android:textColorSecondary">#FFFFFF</item>
+    </style>
+
 </resources>

@@ -47,6 +47,8 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation("org.osmdroid:osmdroid-android:6.1.13")
+    implementation("androidx.fragment:fragment-ktx:1.8.5")
+    implementation("androidx.preference:preference:1.2.0")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
