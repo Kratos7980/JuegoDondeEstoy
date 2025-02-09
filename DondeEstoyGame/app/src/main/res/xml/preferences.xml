@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <CheckBoxPreference
+    <SwitchPreference
         android:defaultValue="true"
-        android:key="pref_sound"
-        android:summary="Esto es para poder activar o desactivar el sonido de los botones"
+        android:key="pref_notifications"
+        android:summary="Esto es para poder activar o desactivar el sonido"
         android:title="Configurar sonido"
-        style="@style/PreferenceThemeCustom"/>
+        style="@style/Tema.Preferencias"/>
 </PreferenceScreen>
