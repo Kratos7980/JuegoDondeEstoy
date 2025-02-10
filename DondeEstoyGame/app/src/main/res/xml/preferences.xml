@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <SwitchPreference
         android:defaultValue="true"
-        android:key="pref_notifications"
+        android:key="pref_sound"
         android:summary="Esto es para poder activar o desactivar el sonido"
         android:title="Configurar sonido"
         style="@style/Tema.Preferencias"/>

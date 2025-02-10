@@ -216,6 +216,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
         val distanciaValencia:Double
         val direccion:String
 
+
         point?.let {
             // Verificar si la distancia con alguno de los marcadores es menor a 100 metros
             when(comida.title){
@@ -226,6 +227,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                         ampliarMapa(latitudCiudadReal, longitudCiudadReal)
                         sumarPuntos()
                         Informacion.addComida(comida)
+                        Informacion.sumarVictorias()
                         mostrarAcierto("Ciudad Real");
                     }else{
                         if(Informacion.getIntentos() >1 ){
@@ -246,6 +248,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                         createMarkerSegovia()
                         ampliarMapa(latitudSegovia, longitudSegovia)
                         sumarPuntos()
+                        Informacion.sumarVictorias()
                         Informacion.addComida(comida)
                         mostrarAcierto("Segovia");
                     }else{
@@ -264,6 +267,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                         createMarkerValencia()
                         ampliarMapa(latitudValencia, longitudValencia)
                         sumarPuntos()
+                        Informacion.sumarVictorias()
                         Informacion.addComida(comida)
                         mostrarAcierto("Valencia");
                     }else{
@@ -282,6 +286,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                         createMarkerCordoba()
                         ampliarMapa(latitudCordoba, longitudCordoba)
                         sumarPuntos()
+                        Informacion.sumarVictorias()
                         Informacion.addComida(comida)
                         mostrarAcierto("Córdoba");
                     }else{
@@ -300,6 +305,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                         createMarketMurcia()
                         ampliarMapa(latitudMurcia, longitudMurcia)
                         sumarPuntos()
+                        Informacion.sumarVictorias()
                         Informacion.addComida(comida)
                         mostrarAcierto("Murcia");
                     }else{
@@ -314,7 +320,8 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                 }
             }
         }
-        if (Informacion.getPuntos() == 5) {
+
+        if (Informacion.getVictorias() == 5) {
             if (Informacion.getSonido()) {
                 val mediaPlayer = MediaPlayer.create(this, R.raw.celebracion)
                 mediaPlayer?.start()
@@ -416,6 +423,8 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
         }
         builder.show()
     }
+
+
 
     private fun sumarPuntos(){
         val intentos = Informacion.getIntentos()

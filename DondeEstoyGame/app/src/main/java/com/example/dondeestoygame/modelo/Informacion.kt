@@ -7,6 +7,7 @@ object Informacion {
 
     private var puntos: Int = 0
     private var intentos: Int = 5
+    private var victorias: Int = 0
     private val listComida: ArrayList<Comida> = ArrayList()
     private var dificultad: Int = 1
     private var sonido: Boolean = true
@@ -30,6 +31,15 @@ object Informacion {
 
     fun sumarPuntos(puntos: Int) {
         this.puntos += puntos
+    }
+
+
+    fun getVictorias(): Int {
+        return victorias
+    }
+
+    fun sumarVictorias() {
+        this.victorias += 1
     }
 
 
