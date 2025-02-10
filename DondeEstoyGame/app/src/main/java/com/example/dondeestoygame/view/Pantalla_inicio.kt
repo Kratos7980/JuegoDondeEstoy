@@ -2,7 +2,8 @@ package com.example.dondeestoygame.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.CheckBox
+import android.widget.RadioButton
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.dondeestoygame.databinding.ActivityPantallaInicioBinding
 import com.example.dondeestoygame.modelo.Informacion
@@ -24,14 +25,21 @@ class Pantalla_inicio : AppCompatActivity() {
         }
 
         val jugar = binding.btnJugar
-        val dificultad = binding.ckDificil
+        val dificil: RadioButton = binding.rbDificil
+        val facil: RadioButton = binding.rbFacil
 
         jugar.setOnClickListener {
-            if(dificultad!!.isChecked){
-                Informacion.setDificultad(2)
+
+            if(dificil.isChecked || facil.isChecked){
+                if (dificil.isChecked) {
+                    Informacion.setDificultad(2)
+                }
+                intent = Intent(this, PantallaPrincipal::class.java)
+                startActivity(intent)
+            }else{
+                Toast.makeText(this,"Selecciona una dificultad", Toast.LENGTH_SHORT).show()
             }
-            intent = Intent(this, PantallaPrincipal::class.java)
-            startActivity(intent)
+
         }
 
     }

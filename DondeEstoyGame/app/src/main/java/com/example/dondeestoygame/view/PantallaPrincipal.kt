@@ -10,6 +10,7 @@ import com.example.dondeestoygame.R
 import com.example.dondeestoygame.adapter.ComidaAdapter
 import com.example.dondeestoygame.databinding.ActivityPantallaPrincipalBinding
 import com.example.dondeestoygame.modelo.ComidaSurtidor
+import com.example.dondeestoygame.modelo.Informacion
 
 class PantallaPrincipal : AppCompatActivity() {
 

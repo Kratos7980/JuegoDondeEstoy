@@ -41,43 +41,32 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView"
-        app:layout_constraintVertical_bias="0.051" />
+        app:layout_constraintVertical_bias="0.16000003" />
 
-    <CheckBox
-        android:id="@+id/ckFacil"
+    <RadioGroup
+        android:id="@+id/radioGroup"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
-        android:text="Fácil"
-        android:textColor="@color/black"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnJugar"
-        app:layout_constraintVertical_bias="0.052" />
+        app:layout_constraintVertical_bias="0.01999998">
 
-    <CheckBox
-        android:id="@+id/ckDificil"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
-        android:text="Dificil"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ckFacil"
-        app:layout_constraintVertical_bias="0.067" />
+        <RadioButton
+            android:id="@+id/rbFacil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Fácil"
+            android:textStyle="bold" />
+
+        <RadioButton
+            android:id="@+id/rbDificil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dificil"
+            android:textStyle="bold" />
+    </RadioGroup>
 
     <Button
         android:id="@+id/btnSalir"
@@ -90,7 +79,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ckDificil"
-        app:layout_constraintVertical_bias="0.101" />
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+        app:layout_constraintVertical_bias="0.069" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
