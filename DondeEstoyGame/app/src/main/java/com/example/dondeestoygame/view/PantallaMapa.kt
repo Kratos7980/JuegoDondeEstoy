@@ -254,7 +254,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                     }else{
                         if(Informacion.getIntentos() > 1 ){
                             Informacion.restarIntentos(1)
-                            direccion = calcularDireccion(it.latitude, it.longitude, latitudCiudadReal, longitudCiudadReal)
+                            direccion = calcularDireccion(it.latitude, it.longitude, latitudSegovia, longitudSegovia)
                             mostrarAlerta(direccion)
                         }else{
                             volverAPrincipal()
@@ -273,7 +273,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                     }else{
                         if(Informacion.getIntentos() > 1 ){
                             Informacion.restarIntentos(1)
-                            direccion = calcularDireccion(it.latitude, it.longitude, latitudCiudadReal, longitudCiudadReal)
+                            direccion = calcularDireccion(it.latitude, it.longitude, latitudValencia, longitudValencia)
                             mostrarAlerta(direccion)
                         }else{
                             volverAPrincipal()
@@ -292,7 +292,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                     }else{
                         if(Informacion.getIntentos() > 1 ){
                             Informacion.restarIntentos(1)
-                            direccion = calcularDireccion(it.latitude, it.longitude, latitudCiudadReal, longitudCiudadReal)
+                            direccion = calcularDireccion(it.latitude, it.longitude, latitudCordoba, longitudCordoba)
                             mostrarAlerta(direccion)
                         }else{
                             volverAPrincipal()
@@ -311,7 +311,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
                     }else{
                         if(Informacion.getIntentos() > 1 ){
                             Informacion.restarIntentos(1)
-                            direccion = calcularDireccion(it.latitude, it.longitude, latitudCiudadReal, longitudCiudadReal)
+                            direccion = calcularDireccion(it.latitude, it.longitude, latitudMurcia, longitudMurcia)
                             mostrarAlerta(direccion)
                         }else{
                             volverAPrincipal()

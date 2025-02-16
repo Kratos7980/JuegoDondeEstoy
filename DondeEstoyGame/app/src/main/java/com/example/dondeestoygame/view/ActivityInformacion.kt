@@ -17,15 +17,15 @@ class ActivityInformacion : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityInformacionBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        //Obtenemos la lista de comidas.
         val listComida = Informacion.getListComida();
-
+        //Recuperamos el recycler view.
         val rv = binding.rvInformacion
-
+        //Creamos el adaptador y lo vinculamos con el recycler view.
         myAdapter = InformacionAdapter(listComida)
         rv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         rv.adapter = myAdapter
-
+        //Recuperamos el TextView de puntos y lo actualizamos.
         val puntos = binding.tvPuntos
         puntos.text = Informacion.getPuntos().toString()
 
