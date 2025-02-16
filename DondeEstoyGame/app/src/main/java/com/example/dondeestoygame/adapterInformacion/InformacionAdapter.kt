@@ -13,26 +13,26 @@ class InformacionAdapter(private val comidas: List<Comida>): Adapter<ImagenViewH
     init {
         data = comidas
     }
-
+    // Actualiza los datos
     fun updateData(newData: List<Comida>) {
         this.data = newData
         notifyItemChanged(0, data.size-1)
         notifyDataSetChanged()
     }
-
+    // Devuelve la posición del elemento seleccionado
     fun getSelectedItem(): Int {
         return posSelectedItem
     }
-
+    // Crea el ViewHolder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImagenViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return ImagenViewHolder(layoutInflater.inflate(R.layout.item_puntuacion, parent, false))
     }
-
+    // Devuelve el número de elementos
     override fun getItemCount(): Int {
         return data.size
     }
-
+    // Carga los datos en el ViewHolder
     override fun onBindViewHolder(holder: ImagenViewHolder, position: Int) {
         val comida = comidas[position]
         holder.nombre.text = comida.title

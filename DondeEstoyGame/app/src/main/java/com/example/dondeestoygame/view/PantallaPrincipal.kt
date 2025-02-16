@@ -9,8 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dondeestoygame.R
 import com.example.dondeestoygame.adapter.ComidaAdapter
 import com.example.dondeestoygame.databinding.ActivityPantallaPrincipalBinding
-import com.example.dondeestoygame.modelo.ComidaSurtidor
-import com.example.dondeestoygame.modelo.Informacion
+import com.example.dondeestoygame.modelo.ComidaProvider
 
 class PantallaPrincipal : AppCompatActivity() {
 
@@ -21,14 +20,14 @@ class PantallaPrincipal : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityPantallaPrincipalBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        // Configurar el toolbar
         val toolbar = binding.tbMenu
         setSupportActionBar(toolbar)
-
-        val listComida = ComidaSurtidor.getComida()
-
+        // Recuperar la lista de comidas
+        val listComida = ComidaProvider.getComida()
+        // Recuperar el recycler view
         val rv = binding.rvItemsList
-
+        // Configurar el adapter, layout manager y añadir el adapter al recycler view
         myAdapter = ComidaAdapter(listComida, this)
         rv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         rv.adapter = myAdapter
@@ -36,12 +35,12 @@ class PantallaPrincipal : AppCompatActivity() {
 
 
     }
-
+    // Configurar el menú.
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
         return true
     }
-
+    // Configurar el menú de opciones.
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
             R.id.item_settings ->{
