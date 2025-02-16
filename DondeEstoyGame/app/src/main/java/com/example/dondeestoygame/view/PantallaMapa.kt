@@ -204,7 +204,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
         mapView.overlays.add(markerMurcia)
     }
 
-
+    // Reiniciar puntero para que no se quede marcado.
     private var ultimoMarcador: Marker? = null
     private var ultimoCirculo: Polygon? = null
 
@@ -360,7 +360,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
     override fun longPressHelper(point: GeoPoint?): Boolean {
         return false
     }
-
+    // Calcular distancia entre dos puntos.
     private fun calcularDistancia(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {
         val radioTierra = 6371000.0 // Radio de la Tierra en metros
         val dLat = Math.toRadians(lat2 - lat1)
@@ -369,7 +369,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
         val c = 2 * atan2(sqrt(a), sqrt(1 - a))
         return radioTierra * c // Distancia en metros
     }
-
+    // Calcula la direccion hacia la que está orientada la comida.
     private fun calcularDireccion(lat1:Double, lon1:Double, lat2:Double, lon2:Double):String{
         // Determinar dirección
         val direccion = when {
@@ -390,7 +390,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
         mapView.controller.setZoom(12.00) // Ajusta el zoom según la vista deseada
 
     }
-
+    // Mostrar alerta cuando se equivoca el usuario.
     private fun mostrarAlerta(direccion:String) {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("¡Te equivocaste!")
@@ -401,7 +401,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
         }
         builder.show()
     }
-
+    // Mostrar alerta cuando acierta el usuario.
     private fun mostrarAcierto(nombreCiudad:String){
         val builder = AlertDialog.Builder(this)
         builder.setTitle("¡ACERTASTE!")
@@ -421,7 +421,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
         }
         builder.show()
     }
-
+    // Sumar puntos cuando acierta el usuario.
     private fun sumarPuntos(){
         val intentos = Informacion.getIntentos()
         when(intentos){
@@ -432,7 +432,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
             1 -> Informacion.sumarPuntos(10)
         }
     }
-
+    // Volver al menú principal cuando el usuario se queda sin intentos.
     private fun volverAPrincipal(){
         val builder = AlertDialog.Builder(this)
         builder.setTitle("¡PERDISTE!")
