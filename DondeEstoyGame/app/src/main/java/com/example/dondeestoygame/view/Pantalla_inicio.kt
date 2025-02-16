@@ -17,17 +17,17 @@ class Pantalla_inicio : AppCompatActivity() {
 
         binding = ActivityPantallaInicioBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        // Botón salir.
         val salir = binding.btnSalir
-
+        // Accion boton salir.
         salir.setOnClickListener {
             finish()
         }
-
+        // Recuperar componentes.
         val jugar = binding.btnJugar
         val dificil: RadioButton = binding.rbDificil
         val facil: RadioButton = binding.rbFacil
-
+        // Accion boton jugar.
         jugar.setOnClickListener {
 
             if(dificil.isChecked || facil.isChecked){

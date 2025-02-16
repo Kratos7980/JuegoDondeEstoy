@@ -59,25 +59,26 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        // Pedir permisos
         checkPermissionsState()
 
         Configuration.getInstance().setUserAgentValue(getPackageManager().toString())
 
         binding = ActivityPantallaMapaBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        // Recuperar comida de la actividad anterior
         val bundle = intent.getBundleExtra("data")
         comida = bundle?.getSerializable("comida") as Comida
-
+        // Cambiar radioDeAlerta según la dificultad
         if(Informacion.getDificultad() == 2){
             radioDeAlerta = 50000.0
         }
-
+        // Cambiar imagen y texto de la comida
         binding.imageView.setImageResource(comida.image)
         binding.txtComida.text = comida.title
-
+        // Recuperar el mapa
         mapView = binding.map
-
+        // Iniciar el mapa
         setupMap()
     }
 
@@ -90,7 +91,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
         super.onPause()
         mapView.onPause()
     }
-
+    // Pedir permisos
     private fun checkPermissionsState(){
 
         val fineLocationPermissionCheck = ContextCompat.checkSelfPermission(
@@ -106,7 +107,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
             )
         }
     }
-
+    // Pedir permisos
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
 
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
@@ -132,7 +133,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
         }
 
     }
-
+    // Iniciar el mapa
     private fun setupMap(){
         mapView.setClickable(true)
         mapView.setDestroyMode(false);
@@ -381,7 +382,7 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
         }
         return direccion
     }
-
+    // Ampliar el mapa.
     fun ampliarMapa(latitud:Double, longitud:Double){
         
         // Configurar el centro en España y el nivel de zoom

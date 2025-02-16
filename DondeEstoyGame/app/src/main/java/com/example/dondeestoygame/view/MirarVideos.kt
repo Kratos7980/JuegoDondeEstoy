@@ -24,14 +24,15 @@ class MirarVideos : AppCompatActivity() {
         val bundle = intent.getBundleExtra("data")
         comida = bundle?.getSerializable("comida") as Comida
 
+        // Reproducir el vídeo;
         binding.botPlay.setOnClickListener {
             var mediaControls: MediaController = MediaController(this)
             mediaControls.setAnchorView(binding.vv)
 
-            // set the media controller for video view
+            // Crea el controlador de medios
             binding.vv.setMediaController(mediaControls)
 
-            // set the absolute path of the video file which is going to be played
+            // Carga el video según la comida.
             when(comida.title) {
                 "Migas de pastor" -> {
                     binding.vv.setVideoURI(
@@ -53,19 +54,19 @@ class MirarVideos : AppCompatActivity() {
                 }
 
             }
-
+            // Prepara el video
             binding.vv.requestFocus()
 
-            // arranca the video
+            // Arranca el video
             binding.vv.start()
 
-            // display a toast message after the video is completed
+            // Muestra un mensaje al completar la visualización del video.
             binding.vv.setOnCompletionListener {
                 Toast.makeText(applicationContext, "Video completado",
                     Toast.LENGTH_LONG).show()
             }
 
-            // display a toast message if any error occurs while playing the video
+            // Muestra un mensaje de erro si hay algún problema mientras se reproduce el video.
             binding.vv.setOnErrorListener { mp, what, extra ->
                 Toast.makeText(applicationContext, "Ha ocurrido un errror " +
                         "mientros se reproduce el video !!!", Toast.LENGTH_LONG).show()
@@ -90,7 +91,7 @@ class MirarVideos : AppCompatActivity() {
             binding.vv.stopPlayback()
         }
     }
-
+    // Alerta en caso de que no sean migas de pastor.
     private fun enConstruccion(){
         val builder = AlertDialog.Builder(this)
         builder.setTitle("¡LO SENTIMOS!")

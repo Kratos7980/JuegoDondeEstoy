@@ -9,7 +9,7 @@ import com.example.dondeestoygame.modelo.Informacion
 
 class SettingsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedPreferenceChangeListener {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-        setPreferencesFromResource(R.xml.preferences, rootKey) // vincula el fuch
+        setPreferencesFromResource(R.xml.preferences, rootKey) // Carga el XML de preferencias
     }
 
     override fun onResume() {
@@ -21,7 +21,7 @@ class SettingsFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedP
         super.onPause()
         preferenceManager.sharedPreferences?.unregisterOnSharedPreferenceChangeListener(this)
     }
-
+    // Controla los cambios de preferencias
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         when (key) {
             "pref_sound" -> {
