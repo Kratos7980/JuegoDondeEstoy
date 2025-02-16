@@ -414,17 +414,13 @@ class PantallaMapa : AppCompatActivity(), MapEventsReceiver {
             "Zarangollo" -> builder.setIcon(R.drawable.zarangollo)
         }
 
-
-
-
         builder.setPositiveButton("OK") { dialog, which ->
             val intent = Intent(this, PantallaPrincipal::class.java)
             startActivity(intent)
+            finish()
         }
         builder.show()
     }
-
-
 
     private fun sumarPuntos(){
         val intentos = Informacion.getIntentos()
